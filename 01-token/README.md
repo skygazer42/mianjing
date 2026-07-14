@@ -24,29 +24,29 @@ Token 是模型处理文本时的基本离散单元。原始字符串需要先�
 
 ### Tokenizer 设计（11-20）
 
-11. 训练语料变化会不会影响 tokenizer 效果？为什么？
-12. 为什么中文常常看起来“字少，但 token 不一定少”？
-13. 为什么同一个句子在 GPT、BERT、LLaMA 这类模型上的 token 数可能差很多？
-14. 如果新增领域词汇，应该改 tokenizer 还是只做微调？
-15. tokenization 错了会对检索、分类、生成分别造成什么影响？
-16. 为什么 LLM 更偏向 subword tokenization，而不是纯 character-level 或纯 word-level？
-17. 请你用 3 句话解释 BPE 的训练过程。
-18. BPE、WordPiece、Unigram、SentencePiece 的核心区别分别是什么？
-19. WordPiece 为什么会出现 `[UNK]`，而 BPE 往往还能继续拆？
-20. tokenizer 里的 normalization 和 pre-tokenization 分别在做什么？为什么重要？
+1. 训练语料变化会不会影响 tokenizer 效果？为什么？
+2. 为什么中文常常看起来“字少，但 token 不一定少”？
+3. 为什么同一个句子在 GPT、BERT、LLaMA 这类模型上的 token 数可能差很多？
+4. 如果新增领域词汇，应该改 tokenizer 还是只做微调？
+5. tokenization 错了会对检索、分类、生成分别造成什么影响？
+6. 为什么 LLM 更偏向 subword tokenization，而不是纯 character-level 或纯 word-level？
+7. 请你用 3 句话解释 BPE 的训练过程。
+8. BPE、WordPiece、Unigram、SentencePiece 的核心区别分别是什么？
+9. WordPiece 为什么会出现 `[UNK]`，而 BPE 往往还能继续拆？
+10. tokenizer 里的 normalization 和 pre-tokenization 分别在做什么？为什么重要？
 
 ### 工程与应用（21-30）
 
-21. 为什么有些 tokenizer 是可逆的，而有些不是严格可逆的？
-22. padding 和 truncation 分别是什么？为什么对 batch 训练和推理很重要？
-23. 为什么英文、中文、阿拉伯语在同一个模型里的 token 成本可能差很多？
-24. 为什么空格、标点、缩进、换行在 tokenizer 里也很重要？
-25. 代码模型的 tokenizer 和通用文本 tokenizer，设计重点有什么不同？
-26. 什么是 byte-level BPE？它相比普通子词切分的优缺点是什么？
-27. 怎么判断一个 tokenizer 设计得好不好？你会看哪些指标？
-28. 什么情况下值得为垂直领域重新训练 tokenizer？
-29. 什么是 OOV（未登录词）问题？subword tokenization 是怎么缓解它的？
-30. tokenizer 的词表大小和模型规模之间通常是什么关系？为什么不能无脑把词表做得特别大？
+1. 为什么有些 tokenizer 是可逆的，而有些不是严格可逆的？
+2. padding 和 truncation 分别是什么？为什么对 batch 训练和推理很重要？
+3. 为什么英文、中文、阿拉伯语在同一个模型里的 token 成本可能差很多？
+4. 为什么空格、标点、缩进、换行在 tokenizer 里也很重要？
+5. 代码模型的 tokenizer 和通用文本 tokenizer，设计重点有什么不同？
+6. 什么是 byte-level BPE？它相比普通子词切分的优缺点是什么？
+7. 怎么判断一个 tokenizer 设计得好不好？你会看哪些指标？
+8. 什么情况下值得为垂直领域重新训练 tokenizer？
+9. 什么是 OOV（未登录词）问题？subword tokenization 是怎么缓解它的？
+10. tokenizer 的词表大小和模型规模之间通常是什么关系？为什么不能无脑把词表做得特别大？
 
 ## 问题 01-05 详细解读
 
