@@ -245,6 +245,25 @@
 | 149 | [Agent Tool Schema 设计与评测](../23-llm-data-serving-agent-interop-interview-questions/149-agent-tool-schema-design-evaluation-from-scratch.ipynb) | 工具名称、描述、JSON Schema、错误语义、分页、幂等和选择/参数/执行分层指标怎样设计？ |
 | 150 | [Agent Skills 渐进式披露](../23-llm-data-serving-agent-interop-interview-questions/150-agent-skills-progressive-disclosure-from-scratch.ipynb) | 大量技能怎样只暴露元数据、按需加载说明和资源，同时保证路径、完整性、版本与路由可评测？ |
 
+## 第十四组：LLM 效率、对齐与 Agent 评测面试题
+
+这一组从数值格式、长上下文/专家并行进入 KV 与服务调度，再把优化对象扩展到对齐数据、多模态模型、工具轨迹、委托权限和长程可靠性。实现显式写出 online softmax、dispatch、位打包、Roofline、`nn.Module.forward`、loss mask、授权 claims 与统计估计，不以一站式训练/服务/Agent 框架代替回答。
+
+| 编号 | Notebook 回答 | 面试问题 |
+| --- | --- | --- |
+| 151 | [FP8 格式与 Delayed Scaling](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/151-fp8-format-delayed-scaling-from-scratch.ipynb) | E4M3/E5M2 怎样取舍，scale、amax history、margin、饱和与高精度主权重怎样实现？ |
+| 152 | [Ring Attention 与 Context Parallel](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/152-ring-attention-context-parallel-from-scratch.ipynb) | 序列怎样跨设备切分，KV block 如何绕 ring，并用 online softmax 保持精确 causal attention？ |
+| 153 | [MoE Expert Parallel 与负载均衡](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/153-moe-expert-parallel-load-balancing-from-scratch.ipynb) | Top-k、capacity、dispatch/All-to-All、专家合并、辅助损失和 loss-free bias 怎样实现？ |
+| 154 | [KV Cache 低比特量化](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/154-kv-cache-quantization-from-scratch.ipynb) | 为什么 K/V 常采用不同 qparam 轴，2-bit packing、residual window 和 attention 误差怎样验证？ |
+| 155 | [LLM 推理 Roofline 与容量规划](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/155-llm-inference-roofline-capacity-from-scratch.ipynb) | Prefill/decode 为什么分别偏计算/带宽受限，AI、延迟下界、batch 摊销和副本数怎样估算？ |
+| 156 | [Chunked Prefill 调度器](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/156-chunked-prefill-scheduler-from-scratch.ipynb) | 怎样保护 decode TPOT、推进长 prompt、处理 KV 准入、绝对位置、公平和 chunk-size 搜索？ |
+| 157 | [Constitutional AI 与 RLAIF](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/157-constitutional-ai-rlaif-pipeline-from-scratch.ipynb) | 原则怎样变成 critique/revision、AI preference、reward 数据、冲突升级和发布门禁？ |
+| 158 | [Rejection Sampling Fine-Tuning](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/158-rejection-sampling-finetuning-bestofn-from-scratch-pytorch.ipynb) | Best-of-N 怎样过滤、排序、去重、控制 reward 偏差，再做 assistant-only SFT 与迭代评测？ |
+| 159 | [LLaVA 风格视觉语言模型](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/159-llava-vision-language-projector-from-scratch-pytorch.ipynb) | 怎样手写 patch encoder、projector、视觉 token 拼接、causal decoder、loss mask 和两阶段训练？ |
+| 160 | [Tool-use SFT 轨迹与 Loss Mask](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/160-tool-use-sft-trajectory-loss-mask-from-scratch.ipynb) | 调用/结果事件怎样校验、序列化、监督、原子截断、隔离坏轨迹并执行式评测？ |
+| 161 | [Agent OAuth 委托授权](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/161-agent-oauth-delegated-authorization-from-scratch.ipynb) | Audience、scope、token exchange、DPoP、replay、step-up approval 怎样防 confused deputy？ |
+| 162 | [长程 Agent Eval 与 pass@k/pass^k](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/162-long-horizon-agent-evaluation-passk-from-scratch.ipynb) | 状态式任务、组合 grader、多 trial、paired bootstrap、trace replay 和污染门禁怎样设计？ |
+
 ## 推荐学习顺序
 
 1. 先运行 01，理解“算法实现”必须包含训练产物、版本与正确性测试。
@@ -264,6 +283,7 @@
 15. 最后运行 `115–120 -> 121–126`：先实现单 Agent 控制面，再进入多 Agent、多跳 RAG、反思、安全执行、MCP 与全链路观测。
 16. 继续运行 `127–132 -> 133–138`：先建立训练/推理系统底层，再学习 reasoning model 的策略优化、采样搜索、上下文压缩与过程验证。
 17. 继续运行 `139–144 -> 145–150`：先贯通数据 mixture、目标函数、激活/KV 与低比特权重，再进入多租户推理、P/D 解耦和 Agent 互操作工程。
+18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
 
 ## 统一验收标准
 
