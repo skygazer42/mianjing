@@ -169,6 +169,25 @@
 | 101 | [INT8 PTQ 与 QAT](../19-mainstream-ml-dl-interview-questions/101-int8-ptq-qat-quantization-from-scratch.ipynb) | qparam、per-channel、整数 GEMM、校准和 fake quant 怎样实现？ |
 | 102 | [可复现训练与断点续训](../19-mainstream-ml-dl-interview-questions/102-reproducible-training-checkpoint-resume-from-scratch.ipynb) | RNG、sampler、optimizer、scheduler、累积窗口和 checkpoint 怎样完整恢复？ |
 
+## 第十组：生成式 AI 与 Agent 高频面试题的一题一本回答
+
+这一组依据当前 AI/LLM Engineer 题单补齐 Agent、评测、安全和后训练缺口。实现不把 Agent 框架、`generate()`、SFT Trainer 或评测平台当答案，而是显式写出状态机、schema、mask、统计量、权限和失败路径。
+
+| 编号 | Notebook 回答 | 面试问题 |
+| --- | --- | --- |
+| 103 | [Prompt/RAG/SFT/Tool 方案选择](../20-genai-agent-interview-questions/103-prompt-rag-finetuning-tool-choice-from-scratch.ipynb) | 怎样区分知识、行为和动作缺口，并以质量、成本、延迟和风险做决策？ |
+| 104 | [LLM/Agent 黄金集评测](../20-genai-agent-interview-questions/104-llm-evaluation-golden-set-release-gate-from-scratch.ipynb) | 黄金集、grader、轨迹、置信区间、slice 和发布门禁怎样设计？ |
+| 105 | [LLM-as-a-Judge 偏差校准](../20-genai-agent-interview-questions/105-llm-as-judge-bias-calibration-from-scratch.ipynb) | 怎样处理位置、冗长、随机性和 Judge 版本偏差？ |
+| 106 | [Agent Tool Calling](../20-genai-agent-interview-questions/106-agent-tool-calling-schema-idempotency-from-scratch.ipynb) | schema、权限、幂等、审批、重试和 trace 怎样串成可靠执行链路？ |
+| 107 | [ReAct Agent 有界循环](../20-genai-agent-interview-questions/107-react-agent-loop-budget-cycle-detection-from-scratch.ipynb) | Action/Observation、预算、循环检测、重规划和终止条件怎样实现？ |
+| 108 | [Prompt Injection 信任边界](../20-genai-agent-interview-questions/108-prompt-injection-trust-boundary-defense-from-scratch.ipynb) | 怎样处理直接/间接注入、taint、最小权限和高风险动作审批？ |
+| 109 | [约束 JSON 解码](../20-genai-agent-interview-questions/109-constrained-json-decoding-trie-from-scratch.ipynb) | 如何把 schema 编译成 trie 状态并逐步 mask 非法 token？ |
+| 110 | [幻觉、引用与拒答](../20-genai-agent-interview-questions/110-hallucination-grounding-citation-abstention-from-scratch.ipynb) | 怎样验证 claim-evidence、引用覆盖、矛盾并校准拒答阈值？ |
+| 111 | [上下文窗口与 Agent Memory](../20-genai-agent-interview-questions/111-context-window-memory-budgeting-from-scratch.ipynb) | 如何预算、选材、重排、摘要、管理长期记忆和安全截断？ |
+| 112 | [SFT Template、Mask 与 Packing](../20-genai-agent-interview-questions/112-sft-chat-template-loss-mask-packing-from-scratch-pytorch.ipynb) | role token、assistant-only loss、causal shift 和会话隔离怎样实现？ |
+| 113 | [Reward Model 与 KL 策略](../20-genai-agent-interview-questions/113-reward-model-bradley-terry-kl-policy-from-scratch-pytorch.ipynb) | Bradley–Terry、tie、prompt split、reward hacking 与 KL 约束是什么？ |
+| 114 | [质量/成本/延迟模型路由](../20-genai-agent-interview-questions/114-quality-cost-latency-model-routing-from-scratch.ipynb) | 边际收益、阈值、cascade、预算、探索日志和故障降级怎样设计？ |
+
 ## 推荐学习顺序
 
 1. 先运行 01，理解“算法实现”必须包含训练产物、版本与正确性测试。
@@ -184,6 +203,7 @@
 11. 面试系统题按 `67–72 -> 73–78` 运行：先掌握检索、纠错、去重和排序，再进入特征时序、反事实学习、流式结构、校准与在线实验。
 12. 继续运行 `79–84 -> 85–90`：从 LLM/RAG 服务与分布式通信，扩展到流量/队列可靠性、漂移、灰度、在线探索和不确定性。
 13. 最后运行 `91–96 -> 97–102`：先建立数据、指标和数值基础，再串联优化、混合精度、生成、压缩与可复现训练。
+14. 继续运行 `103–108 -> 109–114`：从方案判断与评测进入 Agent 工具/安全，再学习约束生成、记忆、SFT、RLHF 与模型路由。
 
 ## 统一验收标准
 
