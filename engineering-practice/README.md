@@ -264,6 +264,25 @@
 | 161 | [Agent OAuth 委托授权](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/161-agent-oauth-delegated-authorization-from-scratch.ipynb) | Audience、scope、token exchange、DPoP、replay、step-up approval 怎样防 confused deputy？ |
 | 162 | [长程 Agent Eval 与 pass@k/pass^k](../24-llm-efficiency-alignment-agent-evaluation-interview-questions/162-long-horizon-agent-evaluation-passk-from-scratch.ipynb) | 状态式任务、组合 grader、多 trial、paired bootstrap、trace replay 和污染门禁怎样设计？ |
 
+## 第十五组：现代 LLM 架构、检索与 Agent 安全面试题
+
+这一组把最新架构机制与生产控制面放在同一条验证链：从 latent cache、多 token 目标和模型/流水并行，进入可验证奖励与模型合并，再比较多向量/学习型稀疏检索、评测去污染，以及 MCP Client Features、信息流安全和相关多 Agent 共识。每本都要求 full-reference、边界反例或策略 oracle，不把论文术语和框架调用当作实现。
+
+| 编号 | Notebook 回答 | 面试问题 |
+| --- | --- | --- |
+| 163 | [Multi-Head Latent Attention](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/163-multi-head-latent-attention-mla-cache-from-scratch-pytorch.ipynb) | MLA 低秩 KV、解耦 RoPE、矩阵吸收和逐 token latent cache 怎样实现并验证等价？ |
+| 164 | [Multi-Token Prediction](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/164-multi-token-prediction-mtp-from-scratch-pytorch.ipynb) | 多 horizon 标签、文档边界、加权 loss、候选树和 verifier 接受前缀怎样实现？ |
+| 165 | [Tensor Parallel Column/Row Linear](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/165-tensor-parallel-column-row-linear-from-scratch.ipynb) | Column/Row 切分、collective、vocab-parallel loss、梯度与 checkpoint 重分片怎样验证？ |
+| 166 | [Pipeline Parallel 1F1B](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/166-pipeline-parallel-1f1b-scheduler-from-scratch.ipynb) | GPipe/1F1B 的依赖、bubble、激活内存、微批权重和 optimizer barrier 怎样设计？ |
+| 167 | [RLVR 与可验证奖励](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/167-rlvr-verifiable-rewards-from-scratch-pytorch.ipynb) | 数学/代码 verifier、奖励分解、group advantage、策略 loss 和 reward hacking 门禁怎样实现？ |
+| 168 | [Task Arithmetic、TIES 与 DARE](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/168-task-arithmetic-ties-dare-model-merging-from-scratch.ipynb) | 同 base 模型的 delta、冲突、trim、drop-rescale、scale 搜索和制品谱系怎样处理？ |
+| 169 | [ColBERT Late Interaction](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/169-colbert-late-interaction-maxsim-from-scratch-pytorch.ipynb) | MaxSim、in-batch negatives、候选召回、residual compression 和索引版本怎样落地？ |
+| 170 | [SPLADE Learned Sparse Retrieval](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/170-splade-learned-sparse-retrieval-from-scratch-pytorch.ipynb) | 学习型扩展、max pooling、FLOPS 正则、impact index、剪枝量化和 postings 怎样实现？ |
+| 171 | [LLM Benchmark 去污染](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/171-llm-benchmark-decontamination-from-scratch.ipynb) | Exact、N-gram containment、MinHash、阈值、时间边界和 raw-clean score 怎样设计？ |
+| 172 | [MCP Sampling、Elicitation 与 Roots](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/172-mcp-sampling-elicitation-roots-capability-from-scratch.ipynb) | Client Features、版本能力协商、有界 sampling loop、两类 elicitation 和 roots 怎样实现？ |
+| 173 | [Agent Taint 与 Provenance](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/173-agent-taint-provenance-prompt-injection-defense-from-scratch.ipynb) | 外部内容污点怎样传播，并在 side-effect/egress sink 前结合用户意图、审批与 provenance 门禁？ |
+| 174 | [Multi-Agent Debate 与相关共识](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/174-multi-agent-debate-correlated-consensus-from-scratch.ipynb) | 多数票何时失效，相关错误、簇限权、证据、Judge 偏差与停止预算怎样处理？ |
+
 ## 推荐学习顺序
 
 1. 先运行 01，理解“算法实现”必须包含训练产物、版本与正确性测试。
@@ -284,6 +303,7 @@
 16. 继续运行 `127–132 -> 133–138`：先建立训练/推理系统底层，再学习 reasoning model 的策略优化、采样搜索、上下文压缩与过程验证。
 17. 继续运行 `139–144 -> 145–150`：先贯通数据 mixture、目标函数、激活/KV 与低比特权重，再进入多租户推理、P/D 解耦和 Agent 互操作工程。
 18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
+19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
 
 ## 统一验收标准
 
