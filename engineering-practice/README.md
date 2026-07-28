@@ -131,6 +131,25 @@
 | 77 | [概率校准与业务阈值](../17-interview-systems-from-scratch/77-model-calibration-thresholding-from-scratch-pytorch.ipynb) | reliability、ECE/Brier、temperature/isotonic、成本阈值和分组监控怎样实现？ |
 | 78 | [A/B 实验与序贯决策](../17-interview-systems-from-scratch/78-ab-testing-sequential-experiment-from-scratch.ipynb) | 随机化、SRM、CUPED、ratio metric、多重检验、提前偷看与非劣效护栏怎样实现？ |
 
+## 第八组：机器学习系统面试题的一题一本回答
+
+这一组把题目直接写在 Notebook 首屏，围绕 LLM/RAG 服务、分布式训练、可靠性、监控发布和在线决策展开。每本先给面试回答主线，再用可运行的底层状态机或数值算法证明关键结论；框架只作为生产替换点讨论，不作为核心实现。
+
+| 编号 | Notebook 回答 | 面试问题 |
+| --- | --- | --- |
+| 79 | [Continuous Batching 调度器](../18-ml-system-interview-questions/79-llm-continuous-batching-scheduler-from-scratch.ipynb) | LLM 推理如何处理 prefill/decode、token/KV budget、尾延迟、deadline 与租户公平？ |
+| 80 | [多租户语义缓存](../18-ml-system-interview-questions/80-multitenant-semantic-cache-from-scratch.ipynb) | RAG/LLM 语义缓存如何避免陈旧命中、缓存投毒、跨租户和跨权限泄漏？ |
+| 81 | [向量数据库分片与复制](../18-ml-system-interview-questions/81-vector-database-sharding-replication-from-scratch.ipynb) | 向量分片路由、local/global Top-K、过滤、副本故障和在线迁移怎样实现？ |
+| 82 | [RAG 摄取与版本链路](../18-ml-system-interview-questions/82-rag-ingestion-versioning-idempotency-from-scratch.ipynb) | 文档、chunk、outbox、索引和删除怎样做到幂等、可追踪、可对账和可回滚？ |
+| 83 | [多路召回预算与融合](../18-ml-system-interview-questions/83-multichannel-retrieval-budget-fusion-from-scratch.ipynb) | keyword/dense/entity/fresh 通道如何分配配额、去重融合并在超时后降级？ |
+| 84 | [Ring AllReduce](../18-ml-system-interview-questions/84-ring-allreduce-distributed-training-from-scratch.ipynb) | Reduce-Scatter 与 All-Gather 如何实现，通信量、低精度和 bucket overlap 怎样分析？ |
+| 85 | [限流算法与分层配额](../18-ml-system-interview-questions/85-rate-limiting-token-bucket-sliding-window-from-scratch.ipynb) | Token Bucket、Leaky Bucket、滑动窗口、多级原子扣费和故障策略怎样取舍？ |
+| 86 | [At-Least-Once 任务队列](../18-ml-system-interview-questions/86-at-least-once-job-queue-idempotency-from-scratch.ipynb) | visibility lease、业务幂等、heartbeat、退避重试、DLQ 和 outbox 怎样串联？ |
+| 87 | [模型漂移监控](../18-ml-system-interview-questions/87-ml-data-drift-monitoring-from-scratch.ipynb) | PSI/JS/KS/Page-Hinkley、延迟标签、分组切片和迟滞告警怎样实现？ |
+| 88 | [Shadow、Canary 与回滚](../18-ml-system-interview-questions/88-model-canary-shadow-rollback-from-scratch.ipynb) | 模型如何稳定分流、设置质量/延迟 guardrail、处理多次查看并自动回滚？ |
+| 89 | [LinUCB 在线探索](../18-ml-system-interview-questions/89-contextual-bandit-linucb-delayed-feedback-from-scratch.ipynb) | Contextual Bandit 如何训练、记录 propensity、处理延迟反馈并做 IPS/SNIPS？ |
+| 90 | [Conformal Prediction](../18-ml-system-interview-questions/90-conformal-prediction-uncertainty-from-scratch.ipynb) | 如何为回归/分类输出带覆盖率目标的区间/集合，并说明分组与漂移限制？ |
+
 ## 推荐学习顺序
 
 1. 先运行 01，理解“算法实现”必须包含训练产物、版本与正确性测试。
@@ -144,6 +163,7 @@
 9. 最后按 `43–45 -> 46–48 -> 49–51 -> 52–54` 运行现代架构与跨领域系统，重点比较序列状态、空间层次、事件时间、策略数据和多任务语义的不同合同。
 10. 继续按 `55–57 -> 58–60 -> 61–63 -> 64–66` 运行专项复现，比较参数高效对齐、概率精确推理、提示/几何坐标、图增强/等变性、离策略控制与离散潜变量各自的正确性 oracle。
 11. 面试系统题按 `67–72 -> 73–78` 运行：先掌握检索、纠错、去重和排序，再进入特征时序、反事实学习、流式结构、校准与在线实验。
+12. 继续运行 `79–84 -> 85–90`：从 LLM/RAG 服务与分布式通信，扩展到流量/队列可靠性、漂移、灰度、在线探索和不确定性。
 
 ## 统一验收标准
 
@@ -171,11 +191,11 @@
 
 ## 后续可继续扩展
 
-- 分布式 ANN 分片、压缩索引迁移、learned sparse retrieval 与在线压测
+- DiskANN/GPU ANN、learned sparse retrieval、跨地域复制与在线压测
 - 多跳规划、Agentic RAG、检索反馈学习与端到端故障归因
 - 多标签/层级分类与人工审核工作流
 - 检索服务 API、压测、缓存、灰度与回滚
 - 音频事件检测、说话人识别与语音增强
 - 视觉语言生成、视频理解、视频扩散与动态 3D 场景
 - CQL/IQL、offline RL、world model 与安全策略评估
-- 地理空间、因果推断、强化学习/老虎机与在线实验
+- 地理空间、uplift/因果图、深度 contextual bandit 与安全离线强化学习

@@ -27,9 +27,9 @@
 
 ## 工程实践
 
-[工程实践 Notebooks](./engineering-practice/README.md) 专门回答“系统怎么实现和验证”，现有 78 份中文实验：前 18 份覆盖 tokenizer/检索/RAG、NLP 数据与实体链接、CV/OCR、图算法与 GNN、多模态、推荐及时序系统；19–66 用 PyTorch 手写 `class XxxNet(nn.Module)` 与 `forward`，复现 NLP、LLM 训练推理、2D/3D 视觉、图表示与等变网络、推荐、时序、生成、语音和强化学习架构；67–78 则把开放式系统设计面试题拆成一题一本，从基础数据结构和公式实现到评估、发布与失败处理。
+[工程实践 Notebooks](./engineering-practice/README.md) 专门回答“系统怎么实现和验证”，现有 90 份中文实验：前 18 份覆盖 tokenizer/检索/RAG、NLP 数据与实体链接、CV/OCR、图算法与 GNN、多模态、推荐及时序系统；19–66 用 PyTorch 手写 `class XxxNet(nn.Module)` 与 `forward`，复现 NLP、LLM 训练推理、2D/3D 视觉、图表示与等变网络、推荐、时序、生成、语音和强化学习架构；67–90 则把开放式系统设计面试题拆成一题一本，从基础数据结构和公式实现到评估、发布与失败处理。
 
-第 55–66 份按方向放在根目录的 [LLM 训练与推理](./13-llm-training-inference/README.md)、[进阶视觉与 3D](./14-advanced-vision-3d/README.md)、[图表示与科学学习](./15-graph-representation-science/README.md) 和 [控制、时序与离散生成](./16-control-timeseries-generative/README.md) 中；第 67–78 份位于 [面试系统题底层实现](./17-interview-systems-from-scratch/README.md)，主索引仍由工程实践 README 统一维护。
+第 55–66 份按方向放在根目录的 [LLM 训练与推理](./13-llm-training-inference/README.md)、[进阶视觉与 3D](./14-advanced-vision-3d/README.md)、[图表示与科学学习](./15-graph-representation-science/README.md) 和 [控制、时序与离散生成](./16-control-timeseries-generative/README.md) 中；第 67–78 份位于 [面试系统题底层实现](./17-interview-systems-from-scratch/README.md)，第 79–90 份位于 [机器学习系统面试题](./18-ml-system-interview-questions/README.md)，主索引仍由工程实践 README 统一维护。
 
 ## 推荐学习顺序
 
