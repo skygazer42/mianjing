@@ -150,6 +150,25 @@
 | 89 | [LinUCB 在线探索](../18-ml-system-interview-questions/89-contextual-bandit-linucb-delayed-feedback-from-scratch.ipynb) | Contextual Bandit 如何训练、记录 propensity、处理延迟反馈并做 IPS/SNIPS？ |
 | 90 | [Conformal Prediction](../18-ml-system-interview-questions/90-conformal-prediction-uncertainty-from-scratch.ipynb) | 如何为回归/分类输出带覆盖率目标的区间/集合，并说明分组与漂移限制？ |
 
+## 第九组：主流机器学习与深度学习面试题的一题一本回答
+
+这一组补齐高频基础题中最容易被追问实现细节的部分：数据泄漏、类别不平衡、指标阈值、数值稳定、归一化、梯度、优化器、混合精度、生成解码、蒸馏、量化和可复现训练。每本都从面试结论进入公式与反例，再用 NumPy/PyTorch 基础算子实现，最后落到线上或训练系统合同。
+
+| 编号 | Notebook 回答 | 面试问题 |
+| --- | --- | --- |
+| 91 | [数据切分与泄漏审计](../19-mainstream-ml-dl-interview-questions/91-dataset-splitting-data-leakage-from-scratch.ipynb) | 数据集怎样按 group/time 切分，并发现重复、统计量和未来特征泄漏？ |
+| 92 | [类别不平衡、Focal 与阈值](../19-mainstream-ml-dl-interview-questions/92-class-imbalance-focal-loss-threshold-from-scratch.ipynb) | 采样、损失加权、Focal Loss 和成本阈值怎样联合设计？ |
+| 93 | [ROC、PR、AUC 与阈值指标](../19-mainstream-ml-dl-interview-questions/93-roc-pr-auc-threshold-metrics-from-scratch.ipynb) | 排序指标与决策指标有什么区别，类别不平衡时如何选择？ |
+| 94 | [稳定 Softmax 与交叉熵](../19-mainstream-ml-dl-interview-questions/94-softmax-cross-entropy-numerical-stability-from-scratch.ipynb) | log-sum-exp、梯度、padding mask、label smoothing 与 FP16 怎样实现？ |
+| 95 | [BatchNorm、LayerNorm 与 RMSNorm](../19-mainstream-ml-dl-interview-questions/95-batchnorm-layernorm-rmsnorm-from-scratch-pytorch.ipynb) | 三类归一化的轴、状态、训练/推理差异和残差位置是什么？ |
+| 96 | [梯度消失与爆炸诊断](../19-mainstream-ml-dl-interview-questions/96-vanishing-exploding-gradients-diagnosis-from-scratch-pytorch.ipynb) | 怎样用梯度 trace、初始化、残差和裁剪定位并治理深网训练问题？ |
+| 97 | [手写 SGD、Momentum、Adam 与 AdamW](../19-mainstream-ml-dl-interview-questions/97-sgd-momentum-adam-adamw-from-scratch.ipynb) | 偏差修正、L2/解耦衰减、参数组和优化器断点状态怎样实现？ |
+| 98 | [梯度累积、AMP 与裁剪](../19-mainstream-ml-dl-interview-questions/98-gradient-accumulation-amp-loss-scaling-clipping-from-scratch.ipynb) | 如何保证大 batch 等价，并正确安排 unscale、overflow、clip 与 step？ |
+| 99 | [Greedy、Beam、Top-k 与 Top-p](../19-mainstream-ml-dl-interview-questions/99-greedy-beam-topk-topp-decoding-from-scratch.ipynb) | LLM 解码中的分数、长度、采样、重复限制和停止条件怎样实现？ |
+| 100 | [知识蒸馏](../19-mainstream-ml-dl-interview-questions/100-knowledge-distillation-from-scratch-pytorch.ipynb) | Temperature、KL、`T²`、硬软目标、feature 与 mask 怎样设计？ |
+| 101 | [INT8 PTQ 与 QAT](../19-mainstream-ml-dl-interview-questions/101-int8-ptq-qat-quantization-from-scratch.ipynb) | qparam、per-channel、整数 GEMM、校准和 fake quant 怎样实现？ |
+| 102 | [可复现训练与断点续训](../19-mainstream-ml-dl-interview-questions/102-reproducible-training-checkpoint-resume-from-scratch.ipynb) | RNG、sampler、optimizer、scheduler、累积窗口和 checkpoint 怎样完整恢复？ |
+
 ## 推荐学习顺序
 
 1. 先运行 01，理解“算法实现”必须包含训练产物、版本与正确性测试。
@@ -164,6 +183,7 @@
 10. 继续按 `55–57 -> 58–60 -> 61–63 -> 64–66` 运行专项复现，比较参数高效对齐、概率精确推理、提示/几何坐标、图增强/等变性、离策略控制与离散潜变量各自的正确性 oracle。
 11. 面试系统题按 `67–72 -> 73–78` 运行：先掌握检索、纠错、去重和排序，再进入特征时序、反事实学习、流式结构、校准与在线实验。
 12. 继续运行 `79–84 -> 85–90`：从 LLM/RAG 服务与分布式通信，扩展到流量/队列可靠性、漂移、灰度、在线探索和不确定性。
+13. 最后运行 `91–96 -> 97–102`：先建立数据、指标和数值基础，再串联优化、混合精度、生成、压缩与可复现训练。
 
 ## 统一验收标准
 
