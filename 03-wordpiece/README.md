@@ -1,50 +1,42 @@
-# WordPiece
+# WordPiece 高频面试题
 
-## 一句话定位
+WordPiece 是 BERT 系列常见的子词方法。以下 30 题覆盖经典 BERT 管线、训练思想、MaxMatch 推理、性能与生产兼容。
 
-WordPiece 是一种常见的子词切分方法，典型特点是推理时采用最长匹配，把词切成词表中能命中的最大子词。
+## 基础概念（01-10）
 
-## 高频面试题
+1. [WordPiece 是什么，以及为什么 BERT 使用它？](./01.WordPiece是什么以及为什么BERT使用它.md)
+2. [WordPiece 中的 ## 前缀表示什么？](./02.WordPiece中的井号前缀表示什么.md)
+3. [WordPiece 的基础词表如何保证覆盖？](./03.WordPiece的基础词表如何保证覆盖.md)
+4. [WordPiece 最长匹配算法如何工作？](./04.WordPiece最长匹配算法如何工作.md)
+5. [BasicTokenizer 与 WordPieceTokenizer 如何分工？](./05.BasicTokenizer与WordPieceTokenizer如何分工.md)
+6. [WordPiece 如何处理中文和无空格语言？](./06.WordPiece如何处理中文和无空格语言.md)
+7. [Lowercase 和去重音如何影响 WordPiece？](./07.lowercase和去重音如何影响WordPiece.md)
+8. [WordPiece 词表大小如何影响序列和模型参数？](./08.WordPiece词表大小如何影响序列和模型参数.md)
+9. [WordPiece 子词边界是否等于语言学词素边界？](./09.WordPiece子词边界是否等于语言学词素边界.md)
+10. [WordPiece 编码、解码与 offset 如何对应？](./10.WordPiece编码解码与offset如何对应.md)
 
-1. WordPiece 和 BPE 的差异到底在哪？
-2. WordPiece 推理时为什么常说是“贪心最长匹配”？
-3. `[UNK]` 是怎么出现的？
-4. BERT 为什么适合用 WordPiece？
-5. WordPiece 在中文场景下和英文场景下会有什么不同？
+## 训练与算法原理（11-20）
 
-## 原理剖析
+11. [WordPiece 训练目标为什么不能简单说成最高频合并？](./11.WordPiece训练目标为什么不能简单说成最高频合并.md)
+12. [频率归一化评分如何理解 WordPiece 候选？](./12.频率归一化评分如何理解WordPiece候选.md)
+13. [从语料训练 WordPiece 词表通常有哪些步骤？](./13.从语料训练WordPiece词表通常有哪些步骤.md)
+14. [为什么一个字符缺失可能让整个词变成 [UNK]？](./14.为什么一个字符缺失可能让整个词变成UNK.md)
+15. [MaxMatch 的复杂度与 Trie 优化是什么？](./15.MaxMatch复杂度与Trie优化是什么.md)
+16. [WordPiece 候选剪枝为何重要？](./16.WordPiece候选剪枝为何重要.md)
+17. [WordPiece 与 BPE 在训练和推理上如何系统比较？](./17.WordPiece与BPE在训练和推理上如何系统比较.md)
+18. [WordPiece 与 Unigram 的搜索方式有什么区别？](./18.WordPiece与Unigram的搜索方式有什么区别.md)
+19. [Whole Word Masking 与 WordPiece 是什么关系？](./19.Whole-Word-Masking与WordPiece是什么关系.md)
+20. [多语言 WordPiece 为何容易出现词表竞争？](./20.多语言WordPiece为何容易出现词表竞争.md)
 
-- BPE 更像“按频次不断合并”，WordPiece 更强调“词表上的最优子词切分”。
-- 推理阶段常用 longest-match-first：每次优先拿最长、能命中的子词。
-- 如果从当前位置开始没有任何子词能命中，通常就回退到 `[UNK]`。
-- 相比纯词级切分，WordPiece 可以更稳定地处理长尾词和新词。
+## 工程与场景（21-30）
 
-## 极简实现
-
-```python
-def wordpiece_encode(word: str, vocab: set[str]) -> list[str]:
-    pieces = []
-    i = 0
-    while i < len(word):
-        matched = None
-        for j in range(len(word), i, -1):
-            piece = word[i:j] if i == 0 else "##" + word[i:j]
-            if piece in vocab:
-                matched = piece
-                break
-        if matched is None:
-            return ["[UNK]"]
-        pieces.append(matched)
-        i = j
-    return pieces
-
-
-vocab = {"play", "##ing", "player"}
-print(wordpiece_encode("playing", vocab))
-```
-
-## 继续追问
-
-1. 最长匹配为什么不是全局最优搜索？
-2. 如果词表里同时有 `play` 和 `player`，切分结果如何决定？
-3. WordPiece 对检索、分类、生成任务的影响一样吗？
+21. [如何实现一个可验证的 WordPiece 编码器？](./21.如何实现一个可验证的WordPiece编码器.md)
+22. [生产级 WordPiece 如何用 Trie 和缓存提速？](./22.生产级WordPiece如何用Trie和缓存提速.md)
+23. [WordPiece 出现大量 [UNK] 如何定位和修复？](./23.WordPiece出现大量UNK如何定位和修复.md)
+24. [如何给 BERT 添加领域 WordPiece 词汇？](./24.如何给BERT添加领域WordPiece词汇.md)
+25. [哪些指标能评估 WordPiece 的碎片化程度？](./25.哪些指标能评估WordPiece的碎片化程度.md)
+26. [Normalization 后的 offset 错位如何解决？](./26.normalization后的offset错位如何解决.md)
+27. [如何保证训练、服务和移动端 WordPiece 一致？](./27.如何保证训练服务和移动端WordPiece一致.md)
+28. [超长单词为什么可能造成 WordPiece 性能问题？](./28.超长单词为什么可能造成WordPiece性能问题.md)
+29. [WordPiece 对分类、检索和生成任务影响有何不同？](./29.WordPiece对分类检索和生成任务影响有何不同.md)
+30. [什么场景适合 WordPiece，以及何时不该更换它？](./30.什么场景适合WordPiece以及何时不该更换它.md)
