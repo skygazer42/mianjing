@@ -207,6 +207,25 @@
 | 125 | [MCP 生命周期与最小协议](../21-agent-loop-interview-questions/125-mcp-jsonrpc-lifecycle-capability-from-scratch.ipynb) | Host、Client、Server、Tools、Resources、Prompts、JSON-RPC 和能力协商是什么？ |
 | 126 | [Agent Trace、Replay 与成本归因](../21-agent-loop-interview-questions/126-agent-observability-trace-replay-cost-from-scratch.ipynb) | 怎样定位 Agent 的慢、贵、循环、工具错误和质量回归？ |
 
+## 第十二组：LLM 系统与推理面试题的一题一本回答
+
+这一组从模型训练预算延伸到分布式 mesh、模型状态分片、attention/KV 内存，再进入 reasoning model 的后训练与 test-time search。每本显式实现公式、数组分片、物理块、token mask、搜索状态或 verifier，不把 DeepSpeed、vLLM、RL trainer 和 Agent 框架本身当答案。
+
+| 编号 | Notebook 回答 | 面试问题 |
+| --- | --- | --- |
+| 127 | [Scaling Law 与训练预算](../22-llm-systems-reasoning-interview-questions/127-llm-scaling-law-compute-budget-from-scratch.ipynb) | 给定训练算力、数据上限和推理量，怎样选择参数量、训练 token 与集群工期？ |
+| 128 | [LLM 3D 并行规划](../22-llm-systems-reasoning-interview-questions/128-llm-3d-parallelism-planner-from-scratch.ipynb) | DP、TP、PP、Sequence Parallel 分别解决什么，怎样结合拓扑、显存和 bubble 选型？ |
+| 129 | [ZeRO 分片与通信](../22-llm-systems-reasoning-interview-questions/129-zero-sharding-memory-communication-from-scratch.ipynb) | ZeRO-1/2/3 分别切什么，参数生命周期、offload 和跨 world-size checkpoint 怎样实现？ |
+| 130 | [FlashAttention 与 Online Softmax](../22-llm-systems-reasoning-interview-questions/130-flash-attention-online-softmax-from-scratch.ipynb) | 为什么 FlashAttention 仍是精确 attention，运行最大值、分块和 causal mask 怎样实现？ |
+| 131 | [PagedAttention KV Block Manager](../22-llm-systems-reasoning-interview-questions/131-paged-attention-kv-block-manager-from-scratch.ipynb) | 动态 KV Cache 怎样做块表、按需增长、共享、Copy-on-Write、回收和准入？ |
+| 132 | [Prefix Cache 与 Radix Trie](../22-llm-systems-reasoning-interview-questions/132-prefix-cache-radix-trie-isolation-from-scratch.ipynb) | Prefix Cache 怎样匹配 token、复用完整块、版本失效、隔离租户并参与调度？ |
+| 133 | [LLM PPO](../22-llm-systems-reasoning-interview-questions/133-llm-ppo-token-level-kl-gae-from-scratch-pytorch.ipynb) | RLHF 中 token-level KL、末端 reward、GAE、policy/value clip 和 response mask 怎样串联？ |
+| 134 | [GRPO](../22-llm-systems-reasoning-interview-questions/134-grpo-group-relative-policy-optimization-from-scratch-pytorch.ipynb) | Group-relative advantage 为什么能省 critic，零方差、clip、KL 和 stale rollout 怎样处理？ |
+| 135 | [Self-Consistency](../22-llm-systems-reasoning-interview-questions/135-self-consistency-correlated-voting-from-scratch.ipynb) | 多路径投票为什么有效，怎样处理 parser、相关错误、加权投票、聚类和提前停止？ |
+| 136 | [Tree of Thoughts](../22-llm-systems-reasoning-interview-questions/136-tree-of-thought-budgeted-search-from-scratch.ipynb) | Thought 怎样变成状态，generator、evaluator、剪枝、回溯、verifier 与预算怎样设计？ |
+| 137 | [Agent Context Compaction](../22-llm-systems-reasoning-interview-questions/137-agent-context-compaction-structured-memory-from-scratch.ipynb) | 长时间 Agent 怎样压缩上下文，同时保留事实来源、工具制品、权限和恢复能力？ |
+| 138 | [Process Reward 与 Verifier Search](../22-llm-systems-reasoning-interview-questions/138-process-reward-verifier-guided-search-from-scratch.ipynb) | PRM 与 ORM 有何区别，step 标签、masked loss、路径聚合和 verifier-guided search 怎样实现？ |
+
 ## 推荐学习顺序
 
 1. 先运行 01，理解“算法实现”必须包含训练产物、版本与正确性测试。
@@ -224,6 +243,7 @@
 13. 最后运行 `91–96 -> 97–102`：先建立数据、指标和数值基础，再串联优化、混合精度、生成、压缩与可复现训练。
 14. 继续运行 `103–108 -> 109–114`：从方案判断与评测进入 Agent 工具/安全，再学习约束生成、记忆、SFT、RLHF 与模型路由。
 15. 最后运行 `115–120 -> 121–126`：先实现单 Agent 控制面，再进入多 Agent、多跳 RAG、反思、安全执行、MCP 与全链路观测。
+16. 继续运行 `127–132 -> 133–138`：先建立训练/推理系统底层，再学习 reasoning model 的策略优化、采样搜索、上下文压缩与过程验证。
 
 ## 统一验收标准
 
