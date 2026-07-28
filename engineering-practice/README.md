@@ -283,6 +283,25 @@
 | 173 | [Agent Taint 与 Provenance](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/173-agent-taint-provenance-prompt-injection-defense-from-scratch.ipynb) | 外部内容污点怎样传播，并在 side-effect/egress sink 前结合用户意图、审批与 provenance 门禁？ |
 | 174 | [Multi-Agent Debate 与相关共识](../25-modern-llm-architecture-retrieval-agent-safety-interview-questions/174-multi-agent-debate-correlated-consensus-from-scratch.ipynb) | 多数票何时失效，相关错误、簇限权、证据、Judge 偏差与停止预算怎样处理？ |
 
+## 第十六组：LLM 动态计算、后训练、Agentic RAG 与 Agent Loop 面试题
+
+这一组从模型内部的数值稳定、动态深度、提前退出、低比特网络与扩散式生成出发，进入 KTO/RLOO 后训练，再把检索反思、纠错路由、树搜索、隐藏状态估计和长期记忆治理接入 Agent Loop。每本都用基础算子或显式状态机暴露关键合同，并以 full-reference、梯度方向、边界输入或安全策略作为 correctness oracle。
+
+| 编号 | Notebook 回答 | 面试问题 |
+| --- | --- | --- |
+| 175 | [QK-Norm 与 Attention Logit Softcapping](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/175-qk-norm-attention-logit-softcapping-from-scratch-pytorch.ipynb) | Q/K 归一化、可学习温度、softcap 与 mask 的顺序和稳定性怎样验证？ |
+| 176 | [Mixture-of-Depths Token Routing](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/176-mixture-of-depths-token-routing-from-scratch-pytorch.ipynb) | token top-k、固定容量、未选 token 旁路、路由梯度和 causal decode 怎样实现？ |
+| 177 | [LayerSkip Early Exit 与 Self-Speculative](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/177-layerskip-early-exit-self-speculative-from-scratch-pytorch.ipynb) | 共享 LM head、early-exit loss、layer dropout、完整层验证与加速边界怎样设计？ |
+| 178 | [BitNet b1.58 Ternary BitLinear](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/178-bitnet-b158-ternary-bitlinear-from-scratch-pytorch.ipynb) | absmean 三值量化、激活 int8、STE、整数点积、base-3 打包和真实存储怎样验证？ |
+| 179 | [Masked Diffusion Language Model](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/179-masked-diffusion-language-model-from-scratch-pytorch.ipynb) | 前向 masking、时间条件、masked denoising loss、置信去噪和 infilling 怎样实现？ |
+| 180 | [KTO Unpaired Preference Optimization](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/180-kto-unpaired-preference-optimization-from-scratch-pytorch.ipynb) | 单样本偏好下的 sequence log-ratio、KL 基线、loss aversion、梯度方向和类别失衡怎样处理？ |
+| 181 | [RLOO / REINFORCE Leave-One-Out](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/181-rloo-reinforce-leave-one-out-from-scratch-pytorch.ipynb) | prompt-local LOO baseline、response mask、KL shaping、stale rollout 和无信号组怎样处理？ |
+| 182 | [Self-RAG Adaptive Retrieval 与 Reflection](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/182-self-rag-adaptive-retrieval-reflection-from-scratch.ipynb) | Retrieve、ISREL、ISSUP、ISUSE 怎样控制按需检索、证据过滤、生成和有限重试？ |
+| 183 | [Corrective RAG Retrieval Evaluator](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/183-corrective-rag-retrieval-evaluator-from-scratch.ipynb) | Correct/Ambiguous/Incorrect 三态怎样驱动 knowledge strips、外部 fallback、重组和降级？ |
+| 184 | [LATS / MCTS Agent Planning](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/184-lats-mcts-agent-planning-from-scratch.ipynb) | Selection、Expansion、Simulation、Backpropagation 怎样用于工具规划并隔离真实副作用？ |
+| 185 | [POMDP Belief-State Agent Loop](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/185-agent-pomdp-belief-state-loop-from-scratch.ipynb) | noisy observation 怎样更新 belief，期望效用和信息增益如何决定 inspect、execute 或 stop？ |
+| 186 | [长期 Agent Memory 的巩固与遗忘](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/186-agent-long-term-memory-consolidation-forgetting-from-scratch.ipynb) | 事实怎样追加、修订、按时点查询、失效、受权检索、压缩并接受遗忘评测？ |
+
 ## 推荐学习顺序
 
 1. 先运行 01，理解“算法实现”必须包含训练产物、版本与正确性测试。
@@ -304,6 +323,7 @@
 17. 继续运行 `139–144 -> 145–150`：先贯通数据 mixture、目标函数、激活/KV 与低比特权重，再进入多租户推理、P/D 解耦和 Agent 互操作工程。
 18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
 19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
+20. 继续运行 `175–180 -> 181–186`：先比较动态计算、低比特与扩散生成的 correctness oracle，再串联偏好优化、Agentic RAG、树搜索、belief state 和长期记忆治理。
 
 ## 统一验收标准
 
