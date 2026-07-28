@@ -226,6 +226,25 @@
 | 137 | [Agent Context Compaction](../22-llm-systems-reasoning-interview-questions/137-agent-context-compaction-structured-memory-from-scratch.ipynb) | 长时间 Agent 怎样压缩上下文，同时保留事实来源、工具制品、权限和恢复能力？ |
 | 138 | [Process Reward 与 Verifier Search](../22-llm-systems-reasoning-interview-questions/138-process-reward-verifier-guided-search-from-scratch.ipynb) | PRM 与 ORM 有何区别，step 标签、masked loss、路径聚合和 verifier-guided search 怎样实现？ |
 
+## 第十三组：LLM 数据配方、推理服务与 Agent 互操作面试题
+
+这一组连接训练数据、单机推理算法、线上服务控制面与 Agent 生态接口。每本都从面试回答主线进入底层实现：显式计算采样概率、token 统计、激活/KV/权重内存，手写缓存与路由状态机，并用协议验证、风险策略和分层指标覆盖 Agent 的发现、动作、工具与技能生命周期。
+
+| 编号 | Notebook 回答 | 面试问题 |
+| --- | --- | --- |
+| 139 | [预训练数据混合与 DoReMi](../23-llm-data-serving-agent-interop-interview-questions/139-llm-pretraining-data-mixture-sampling-from-scratch.ipynb) | 多领域语料怎样设定 mixture、temperature、上下界与反馈更新，并避免小域过采样和验证集污染？ |
+| 140 | [Causal LM Loss、PPL 与 BPB](../23-llm-data-serving-agent-interop-interview-questions/140-causal-lm-loss-perplexity-bpb-from-scratch-pytorch.ipynb) | next-token shift、padding/文档边界 mask、分布式聚合、滑窗评分和跨 tokenizer 比较怎样做对？ |
+| 141 | [Activation Checkpointing 与重计算](../23-llm-data-serving-agent-interop-interview-questions/141-activation-checkpointing-recomputation-from-scratch.ipynb) | 激活显存由什么决定，重计算怎样换显存，RNG、原地修改和副作用为什么会破坏梯度？ |
+| 142 | [MHA、MQA、GQA 与 KV Cache](../23-llm-data-serving-agent-interop-interview-questions/142-mha-mqa-gqa-kv-cache-from-scratch.ipynb) | 三种注意力怎样映射 query head 与 KV head，输出如何等价验证，KV 显存和带宽怎样估算？ |
+| 143 | [Attention Sink 与滚动 KV](../23-llm-data-serving-agent-interop-interview-questions/143-streaming-attention-sink-rolling-kv-from-scratch.ipynb) | 流式长文本怎样保留 sink、淘汰局部 token、维护绝对位置，并识别有限窗口无法回答的问题？ |
+| 144 | [GPTQ、AWQ 与 Weight-only Quantization](../23-llm-data-serving-agent-interop-interview-questions/144-gptq-awq-weight-only-quantization-from-scratch.ipynb) | group-wise 量化、校准激活、显著通道保护、误差指标、元数据和发布门禁怎样实现？ |
+| 145 | [多租户 LoRA Adapter Serving](../23-llm-data-serving-agent-interop-interview-questions/145-multitenant-lora-adapter-serving-from-scratch.ipynb) | 一个共享基座怎样批量服务多 adapter，处理版本、缓存淘汰、租户隔离、热更新和回退？ |
+| 146 | [Prefill–Decode 解耦与路由](../23-llm-data-serving-agent-interop-interview-questions/146-prefill-decode-disaggregation-router-from-scratch.ipynb) | 为什么拆分 prefill/decode，KV 传输、节点选择、准入、SLO、goodput 和故障降级怎样权衡？ |
+| 147 | [A2A Agent Card 与 Task 生命周期](../23-llm-data-serving-agent-interop-interview-questions/147-a2a-agent-card-task-lifecycle-from-scratch.ipynb) | Agent 怎样发现彼此、协商能力并管理 task、message、artifact、流式事件、取消和终态？ |
+| 148 | [Computer-use Agent 安全闭环](../23-llm-data-serving-agent-interop-interview-questions/148-computer-use-agent-grounding-safety-loop-from-scratch.ipynb) | screenshot–ground–act–observe 循环怎样处理坐标映射、陈旧画面、动作审批、幂等与轨迹评估？ |
+| 149 | [Agent Tool Schema 设计与评测](../23-llm-data-serving-agent-interop-interview-questions/149-agent-tool-schema-design-evaluation-from-scratch.ipynb) | 工具名称、描述、JSON Schema、错误语义、分页、幂等和选择/参数/执行分层指标怎样设计？ |
+| 150 | [Agent Skills 渐进式披露](../23-llm-data-serving-agent-interop-interview-questions/150-agent-skills-progressive-disclosure-from-scratch.ipynb) | 大量技能怎样只暴露元数据、按需加载说明和资源，同时保证路径、完整性、版本与路由可评测？ |
+
 ## 推荐学习顺序
 
 1. 先运行 01，理解“算法实现”必须包含训练产物、版本与正确性测试。
@@ -244,11 +263,13 @@
 14. 继续运行 `103–108 -> 109–114`：从方案判断与评测进入 Agent 工具/安全，再学习约束生成、记忆、SFT、RLHF 与模型路由。
 15. 最后运行 `115–120 -> 121–126`：先实现单 Agent 控制面，再进入多 Agent、多跳 RAG、反思、安全执行、MCP 与全链路观测。
 16. 继续运行 `127–132 -> 133–138`：先建立训练/推理系统底层，再学习 reasoning model 的策略优化、采样搜索、上下文压缩与过程验证。
+17. 继续运行 `139–144 -> 145–150`：先贯通数据 mixture、目标函数、激活/KV 与低比特权重，再进入多租户推理、P/D 解耦和 Agent 互操作工程。
 
 ## 统一验收标准
 
 - notebook JSON 符合 nbformat 4.5，每个 cell 有唯一 id；
 - 从头到尾按顺序执行，不依赖前一次内核残留；
+- 每个代码单元都有必要的中文注释，重点解释设计意图、张量形状、状态边界或失败分支，不机械逐行复述代码；
 - 代码有断言或指标输出，受控小数据的结果不冒充线上泛化效果；
 - 区分教学实现与生产组件，说明替换点、复杂度、权限和版本契约；
 - 引用原始论文或官方文档，算法名和公式不靠二手博客定义；
