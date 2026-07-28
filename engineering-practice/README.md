@@ -188,6 +188,25 @@
 | 113 | [Reward Model 与 KL 策略](../20-genai-agent-interview-questions/113-reward-model-bradley-terry-kl-policy-from-scratch-pytorch.ipynb) | Bradley–Terry、tie、prompt split、reward hacking 与 KL 约束是什么？ |
 | 114 | [质量/成本/延迟模型路由](../20-genai-agent-interview-questions/114-quality-cost-latency-model-routing-from-scratch.ipynb) | 边际收益、阈值、cascade、预算、探索日志和故障降级怎样设计？ |
 
+## 第十一组：Agent Loop 深入面试题的一题一本回答
+
+这一组继续深入 Agent 的生产控制面。每本不以框架调用代替答案，而是手写计划 DAG、并行 Join、BM25 工具发现、事件溯源、审批票据、共享黑板、多跳证据图、反思停止策略、Capability VM、JSON-RPC 生命周期和 trace/replay，并明确教学实现与生产安全边界。
+
+| 编号 | Notebook 回答 | 面试问题 |
+| --- | --- | --- |
+| 115 | [Workflow 与 Agent 模式选择](../21-agent-loop-interview-questions/115-workflow-vs-agent-pattern-selection-from-scratch.ipynb) | 什么时候用固定 Workflow，什么时候用 Agent？Sequential、Routing、Parallel、Orchestrator 和 Evaluator-Optimizer 怎样选？ |
+| 116 | [计划 DAG 与调度器](../21-agent-loop-interview-questions/116-agent-plan-dag-scheduler-from-scratch.ipynb) | Agent 生成计划后，怎样校验 DAG、并行调度、处理失败和动态重规划？ |
+| 117 | [并行工具执行与 Join](../21-agent-loop-interview-questions/117-parallel-tool-execution-join-consistency-from-scratch.ipynb) | Agent 怎样安全并行调用工具，处理依赖、限流、部分失败和结果合并？ |
+| 118 | [大规模 Tool Catalog 检索](../21-agent-loop-interview-questions/118-large-tool-catalog-retrieval-bm25-from-scratch.ipynb) | Agent 面对成百上千个工具时，怎样做 Tool Discovery、召回和选择？ |
+| 119 | [持久化 Agent 与事件重放](../21-agent-loop-interview-questions/119-durable-agent-event-sourcing-resume-from-scratch.ipynb) | 长时间运行的 Agent 怎样做到崩溃恢复、精确重放和安全取消？ |
+| 120 | [Human-in-the-Loop](../21-agent-loop-interview-questions/120-human-in-the-loop-approval-interrupt-resume-from-scratch.ipynb) | 哪些动作必须审批，审批票据怎样绑定动作，如何中断、超时与恢复？ |
+| 121 | [Multi-Agent Handoff 与 Blackboard](../21-agent-loop-interview-questions/121-multi-agent-handoff-blackboard-isolation-from-scratch.ipynb) | 什么时候需要 Multi-Agent，Handoff、共享状态、隔离和写冲突怎样设计？ |
+| 122 | [Agentic RAG 多跳查询规划](../21-agent-loop-interview-questions/122-agentic-rag-multihop-query-planning-from-scratch.ipynb) | 怎样分解问题、逐跳检索、构建证据图、处理时间冲突并判断停止？ |
+| 123 | [Reflection / Evaluator-Optimizer](../21-agent-loop-interview-questions/123-evaluator-optimizer-reflection-loop-from-scratch.ipynb) | 怎样把评价变成可执行修订，并避免共享盲点、循环和越改越差？ |
+| 124 | [安全代码执行与 Capability VM](../21-agent-loop-interview-questions/124-safe-code-execution-capability-vm-from-scratch.ipynb) | Agent 执行代码时怎样做白名单、资源限制、文件/网络隔离和结果审计？ |
+| 125 | [MCP 生命周期与最小协议](../21-agent-loop-interview-questions/125-mcp-jsonrpc-lifecycle-capability-from-scratch.ipynb) | Host、Client、Server、Tools、Resources、Prompts、JSON-RPC 和能力协商是什么？ |
+| 126 | [Agent Trace、Replay 与成本归因](../21-agent-loop-interview-questions/126-agent-observability-trace-replay-cost-from-scratch.ipynb) | 怎样定位 Agent 的慢、贵、循环、工具错误和质量回归？ |
+
 ## 推荐学习顺序
 
 1. 先运行 01，理解“算法实现”必须包含训练产物、版本与正确性测试。
@@ -204,6 +223,7 @@
 12. 继续运行 `79–84 -> 85–90`：从 LLM/RAG 服务与分布式通信，扩展到流量/队列可靠性、漂移、灰度、在线探索和不确定性。
 13. 最后运行 `91–96 -> 97–102`：先建立数据、指标和数值基础，再串联优化、混合精度、生成、压缩与可复现训练。
 14. 继续运行 `103–108 -> 109–114`：从方案判断与评测进入 Agent 工具/安全，再学习约束生成、记忆、SFT、RLHF 与模型路由。
+15. 最后运行 `115–120 -> 121–126`：先实现单 Agent 控制面，再进入多 Agent、多跳 RAG、反思、安全执行、MCP 与全链路观测。
 
 ## 统一验收标准
 
