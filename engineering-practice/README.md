@@ -302,6 +302,17 @@
 | 185 | [POMDP Belief-State Agent Loop](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/185-agent-pomdp-belief-state-loop-from-scratch.ipynb) | noisy observation 怎样更新 belief，期望效用和信息增益如何决定 inspect、execute 或 stop？ |
 | 186 | [长期 Agent Memory 的巩固与遗忘](../26-llm-dynamic-posttraining-rag-agent-loop-interview-questions/186-agent-long-term-memory-consolidation-forgetting-from-scratch.ipynb) | 事实怎样追加、修订、按时点查询、失效、受权检索、压缩并接受遗忘评测？ |
 
+## 第十七组：LLM 推理优化与 Agent 训练面试题
+
+这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
+
+| 编号 | Notebook 回答 | 面试问题 |
+| --- | --- | --- |
+| 187 | [EAGLE 特征级推测解码](../27-llm-inference-agent-training-interview-questions/187-eagle-feature-speculative-decoding-from-scratch.ipynb) | feature draft、最长接受前缀、target verifier 与 branch KV 怎样精确提交？ |
+| 188 | [H₂O Heavy-Hitter KV Cache](../27-llm-inference-agent-training-interview-questions/188-h2o-heavy-hitter-kv-cache-from-scratch.ipynb) | 累计 attention、recent window、heavy-hitter budget 与因果顺序怎样决定淘汰？ |
+| 189 | [Native Sparse Attention](../27-llm-inference-agent-training-interview-questions/189-native-sparse-attention-from-scratch.ipynb) | block selection、局部窗口、全局块、causal mask 与稀疏算量怎样实现？ |
+| 190 | [Agent Lightning 轨迹 Credit Assignment](../27-llm-inference-agent-training-interview-questions/190-agent-lightning-trajectory-credit-assignment-from-scratch.ipynb) | 如何把 Agent event trace 转为 transition、return-to-go、train/eval group split 与 rollout version gate？ |
+
 ## 推荐学习顺序
 
 1. 先运行 01，理解“算法实现”必须包含训练产物、版本与正确性测试。
@@ -324,6 +335,7 @@
 18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
 19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
 20. 继续运行 `175–180 -> 181–186`：先比较动态计算、低比特与扩散生成的 correctness oracle，再串联偏好优化、Agentic RAG、树搜索、belief state 和长期记忆治理。
+21. 继续运行 `187–189 -> 190`：先验证 target 精确提交、KV 预算和 sparse causal mask，再把同样的事件/版本合同用于 Agent RL trajectory credit assignment。
 
 ## 统一验收标准
 
