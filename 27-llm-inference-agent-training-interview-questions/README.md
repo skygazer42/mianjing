@@ -1,6 +1,6 @@
 # LLM 推理优化与 Agent 训练面试题
 
-这一组继续采用“一道面试问题一本 Notebook”，从 EAGLE 特征级推测解码、H₂O heavy-hitter KV cache、Native Sparse Attention 与 Agent Lightning 式轨迹切片/credit assignment，延伸到有状态 Tool-Agent-User 评测、代码 Agent 沙箱、可中断 KV 恢复、工具副作用补偿、多 Agent 委派、上下文压缩、MCP 契约、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子分块/回填、HyDE 假设文档锚定、Agent 工具错误恢复、KV cache 量化、LoRA 多租户服务、batch-invariant 采样、stop sequence 安全提交、Contextual Retrieval、RAPTOR、长上下文位置鲁棒性、Agent 停滞检测、Text-to-SQL、GraphRAG、时态 RAG、指令层级冲突控制、Web Research Agent 的证据账本、版面多模态 RAG、代码库符号检索、训练数据 PII 治理、checkpoint 制品兼容、MCP OAuth、工具后置条件、反馈记忆冲突治理、Medusa 树验证、CUDA Graph 调度、SimPO 和 DOM 浏览器 Agent。
+这一组继续采用“一道面试问题一本 Notebook”，从 EAGLE 特征级推测解码、H₂O heavy-hitter KV cache、Native Sparse Attention 与 Agent Lightning 式轨迹切片/credit assignment，延伸到有状态 Tool-Agent-User 评测、代码 Agent 沙箱、可中断 KV 恢复、工具副作用补偿、多 Agent 委派、上下文压缩、MCP 契约、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子分块/回填、HyDE 假设文档锚定、Agent 工具错误恢复、KV cache 量化、LoRA 多租户服务、batch-invariant 采样、stop sequence 安全提交、Contextual Retrieval、RAPTOR、长上下文位置鲁棒性、Agent 停滞检测、Text-to-SQL、GraphRAG、时态 RAG、指令层级冲突控制、Web Research Agent 的证据账本、版面多模态 RAG、代码库符号检索、训练数据 PII 治理、checkpoint 制品兼容、MCP OAuth、工具后置条件、反馈记忆冲突治理、Medusa 树验证、CUDA Graph 调度、SimPO、DOM 浏览器 Agent、DoRA、持续预训练、前缀缓存感知路由和 JIT 凭据代理。
 
 每本使用 Python、NumPy 与标准库手写关键状态机、缓存或训练数据合同。每个有效代码行都有中文行内注释；小数据断言只验证实现不变量，不代表大模型吞吐、真实工具安全或线上泛化。
 
@@ -60,6 +60,10 @@
 | 236 | [LLM Serving CUDA Graph Dispatch](./236-llm-serving-cuda-graph-dispatch-from-scratch.ipynb) | 怎样按 BatchDescriptor 选择 full/piecewise/eager，管理 capture/replay、静态缓冲和动态形状 fallback？ |
 | 237 | [SimPO Reference-Free 偏好优化](./237-simpo-reference-free-preference-optimization-from-scratch-pytorch.ipynb) | 为什么平均 token logprob 可作隐式奖励，target margin 与稳定 loss 怎样实现并验证梯度方向？ |
 | 238 | [浏览器 Agent DOM 快照与陈旧动作验证](./238-browser-agent-dom-snapshot-stale-action-verification-from-scratch.ipynb) | 怎样用 page/version/ref、语义 grounding、动作审批、幂等提交和后置条件避免点错或只声称完成？ |
+| 239 | [DoRA 权重分解低秩适配](./239-dora-weight-decomposed-low-rank-adaptation-from-scratch-pytorch.ipynb) | 怎样将权重 magnitude/direction 解耦，手写低秩方向更新、稳定归一化、梯度与 merge/发布合同？ |
+| 240 | [LLM 持续预训练、Replay 与遗忘门禁](./240-llm-continual-pretraining-replay-forgetting-from-scratch-pytorch.ipynb) | 新领域数据到来后怎样 rewarm 学习率、混合旧域 replay，并用 general/domain 矩阵控制灾难性遗忘？ |
+| 241 | [前缀缓存感知 LLM 副本路由](./241-prefix-cache-aware-llm-replica-routing-from-scratch.ipynb) | 怎样在 prefix KV 命中、队列等待、容量、租户隔离与公平之间选择副本，并处理陈旧目录？ |
+| 242 | [Agent JIT Credential Broker 与无密钥工具执行](./242-agent-jit-credential-broker-secretless-tools-from-scratch.ipynb) | 怎样让模型只拿一次性 capability，由隔离 broker 代用凭据，并校验 audience/scope/TTL/参数与重放？ |
 
 ## 建议学习路线
 
@@ -78,11 +82,14 @@
 13. 运行 227–230：把 Agent 的检索/浏览收束为证据账本，扩展到带版面与表格的多模态知识、代码库 API 上下文，以及训练数据的隐私、删除与审计。
 14. 运行 231–234：把模型和 Agent 的制品、身份、行动结果与经验记忆都变成可验证合同，避免“能加载、拿到 token、返回 ok 或写入记忆”被误当成正确性。
 15. 运行 235–238：从多 token 推测和 GPU replay 的推理优化进入 reference-free 偏好学习，最后把浏览器 Agent 的观察、动作与功能成功绑定到可验证页面状态。
+16. 运行 239–242：从参数高效适配和持续预训练的能力—遗忘权衡，进入多副本 cache locality 调度与 Agent 最小权限的即时凭据执行。
 
 ## 主要研究入口
 
 补充参考 [Hugging Face Sharded Checkpoint](https://huggingface.co/docs/transformers/main/big_models)、[MCP Authorization](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization)、[STATE-Bench](https://github.com/microsoft/STATE-Bench) 与 [Memory Conflict Resolution](https://arxiv.org/abs/2606.01435)。
 
 本批参考 [Medusa](https://arxiv.org/abs/2401.10774)、[vLLM CUDA Graphs](https://docs.vllm.ai/en/latest/design/cuda_graphs/)、[SimPO](https://arxiv.org/abs/2405.14734)、[WebArena](https://arxiv.org/abs/2307.13854) 与 [BrowserGym](https://arxiv.org/abs/2412.05467)。
+
+本批补充参考 [DoRA](https://arxiv.org/abs/2402.09353)、[Continual Pre-Training](https://arxiv.org/abs/2308.04014)、[Preble](https://arxiv.org/abs/2407.00023) 与 [Agentic AI Secure Adoption](https://www.cyber.gov.au/business-government/secure-design/artificial-intelligence/careful-adoption-of-agentic-ai-services)。
 
 参考 [EAGLE](https://arxiv.org/abs/2401.15077)、[H₂O](https://arxiv.org/abs/2306.14048)、[Native Sparse Attention](https://arxiv.org/abs/2502.11089)、[Agent Lightning](https://arxiv.org/abs/2508.03680)、[τ-bench](https://arxiv.org/abs/2406.12045)、[SWE-bench](https://arxiv.org/abs/2310.06770)、[INFERCEPT](https://arxiv.org/abs/2402.01869)、[AutoGen](https://arxiv.org/abs/2308.08155)、[MemGPT](https://arxiv.org/abs/2310.08560)、[MCP Versioning](https://modelcontextprotocol.io/docs/learn/versioning)、[Position Interpolation](https://arxiv.org/abs/2306.15595)、[SSE](https://w3c.github.io/eventsource/)、[Representation Engineering](https://arxiv.org/abs/2310.01405)、[Contrastive Decoding](https://arxiv.org/abs/2210.15097)、[Semantic Entropy](https://arxiv.org/abs/2302.09664)、[ROME](https://arxiv.org/abs/2202.05262)、[LLM Watermark](https://arxiv.org/abs/2301.10226)、[Prompt Tuning](https://arxiv.org/abs/2104.08691)、[Adaptive Test-Time Compute](https://arxiv.org/abs/2604.14853)、[Sparse Autoencoders](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html)、[HyDE](https://arxiv.org/abs/2212.10496)、[ReAct](https://arxiv.org/abs/2210.03629)、[Toolformer](https://arxiv.org/abs/2302.04761)、[KIVI](https://arxiv.org/abs/2402.02750)、[S-LoRA](https://arxiv.org/abs/2311.03285)、[vLLM Reproducibility](https://docs.vllm.ai/en/v0.9.1/usage/reproducibility.html)、[Transformers StopStringCriteria](https://huggingface.co/docs/transformers/en/internal/generation_utils)、[Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval)、[RAPTOR](https://arxiv.org/abs/2401.18059)、[Lost in the Middle](https://arxiv.org/abs/2307.03172)、[AgentBench](https://arxiv.org/abs/2308.03688)、[PICARD](https://arxiv.org/abs/2109.05093)、[Microsoft GraphRAG](https://microsoft.github.io/graphrag//query/overview/)、[IA-RAG](https://arxiv.org/abs/2606.06044)、[Model Spec Chain of Command](https://model-spec.openai.com/2025-02-12.html)、[WebGPT](https://arxiv.org/abs/2112.09332)、[SK-VQA](https://arxiv.org/abs/2406.19593)、[RepoCoder](https://arxiv.org/abs/2303.12570) 与 [Training Data Extraction](https://arxiv.org/abs/2012.07805)。
