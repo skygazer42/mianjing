@@ -1,6 +1,6 @@
 # LLM 推理优化与 Agent 训练面试题
 
-这一组继续采用“一道面试问题一本 Notebook”，从 EAGLE 特征级推测解码、H₂O heavy-hitter KV cache、Native Sparse Attention 与 Agent Lightning 式轨迹切片/credit assignment，延伸到有状态 Tool-Agent-User 评测、代码 Agent 沙箱、可中断 KV 恢复、工具副作用补偿、多 Agent 委派、上下文压缩、MCP 契约、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII 与 test-time compute 分配。
+这一组继续采用“一道面试问题一本 Notebook”，从 EAGLE 特征级推测解码、H₂O heavy-hitter KV cache、Native Sparse Attention 与 Agent Lightning 式轨迹切片/credit assignment，延伸到有状态 Tool-Agent-User 评测、代码 Agent 沙箱、可中断 KV 恢复、工具副作用补偿、多 Agent 委派、上下文压缩、MCP 契约、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配，以及 SAE 稀疏特征、父子分块/回填、HyDE 假设文档锚定和 Agent 工具错误恢复。
 
 每本使用 Python、NumPy 与标准库手写关键状态机、缓存或训练数据合同。每个有效代码行都有中文行内注释；小数据断言只验证实现不变量，不代表大模型吞吐、真实工具安全或线上泛化。
 
@@ -32,6 +32,10 @@
 | 208 | [Soft Prompt Tuning](./208-soft-prompt-tuning-frozen-base-from-scratch.ipynb) | 怎样冻结基座并训练连续提示，将 prompt id、形状、模板、租户和评测作为发布制品管理？ |
 | 209 | [LLM 输出 PII Redaction Policy Gate](./209-llm-output-pii-redaction-policy-gate-from-scratch.ipynb) | 怎样扫描 PII span、按风险掩码或阻断、处理未知格式，并以最小化审计和 precision/recall 验收？ |
 | 210 | [自适应 Test-Time Compute 预算分配](./210-adaptive-test-time-compute-budget-allocation-from-scratch.ipynb) | 怎样按样本收益与成本分配采样/搜索预算，并评测质量、延迟、regret、公平与策略漂移？ |
+| 211 | [Sparse Autoencoder LLM 可解释性](./211-sparse-autoencoder-llm-interpretability-from-scratch.ipynb) | 怎样从激活编码、ReLU 稀疏化、top-k、重构误差、feature usage 和干预实验理解 SAE 的单义特征边界？ |
+| 212 | [RAG 父子切块与上下文回填](./212-rag-parent-child-chunking-context-from-scratch.ipynb) | 怎样用 child 精确召回、parent 去重回填、ACL/版本门禁与双层引用同时控制上下文充分性和陈旧索引？ |
+| 213 | [HyDE Query Expansion、RRF 与 Grounding](./213-hyde-query-expansion-rrf-grounding-from-scratch.ipynb) | 怎样隔离假设文档、融合原 query/HyDE 候选、只用真实证据生成，并处理 hallucinated expansion？ |
+| 214 | [Agent Tool Error Recovery 与熔断](./214-agent-tool-error-recovery-circuit-breaker-from-scratch.ipynb) | 怎样分类 transient/permanent/unknown 错误，设计带幂等键的重试、熔断、fallback 与人工升级？ |
 
 ## 建议学习路线
 
@@ -43,7 +47,8 @@
 6. 运行 199–202：将底层 LLM 输入/输出契约补齐——位置坐标、流式事件、并行工具消息与 chat template 必须都可版本化、验证和复放。
 7. 运行 203–206：最后进入模型内部和不确定性——显式控制表征、对比式解码、语义级不确定性与可回滚的知识编辑都要有独立 oracle。
 8. 运行 207–210：把发布和推理控制面补齐——可检测来源、低成本多任务适配、输出侧隐私门禁，以及在全局预算下按样本分配 test-time compute。
+9. 运行 211–214：再把表征可解释性、分层检索/证据锚定与 Agent 的失败恢复连成闭环；其中 HyDE 只能扩展检索候选，绝不能充当最终事实证据。
 
 ## 主要研究入口
 
-参考 [EAGLE](https://arxiv.org/abs/2401.15077)、[H₂O](https://arxiv.org/abs/2306.14048)、[Native Sparse Attention](https://arxiv.org/abs/2502.11089)、[Agent Lightning](https://arxiv.org/abs/2508.03680)、[τ-bench](https://arxiv.org/abs/2406.12045)、[SWE-bench](https://arxiv.org/abs/2310.06770)、[INFERCEPT](https://arxiv.org/abs/2402.01869)、[AutoGen](https://arxiv.org/abs/2308.08155)、[MemGPT](https://arxiv.org/abs/2310.08560)、[MCP Versioning](https://modelcontextprotocol.io/docs/learn/versioning)、[Position Interpolation](https://arxiv.org/abs/2306.15595)、[SSE](https://w3c.github.io/eventsource/)、[Representation Engineering](https://arxiv.org/abs/2310.01405)、[Contrastive Decoding](https://arxiv.org/abs/2210.15097)、[Semantic Entropy](https://arxiv.org/abs/2302.09664)、[ROME](https://arxiv.org/abs/2202.05262)、[LLM Watermark](https://arxiv.org/abs/2301.10226)、[Prompt Tuning](https://arxiv.org/abs/2104.08691) 与 [Adaptive Test-Time Compute](https://arxiv.org/abs/2604.14853)。
+参考 [EAGLE](https://arxiv.org/abs/2401.15077)、[H₂O](https://arxiv.org/abs/2306.14048)、[Native Sparse Attention](https://arxiv.org/abs/2502.11089)、[Agent Lightning](https://arxiv.org/abs/2508.03680)、[τ-bench](https://arxiv.org/abs/2406.12045)、[SWE-bench](https://arxiv.org/abs/2310.06770)、[INFERCEPT](https://arxiv.org/abs/2402.01869)、[AutoGen](https://arxiv.org/abs/2308.08155)、[MemGPT](https://arxiv.org/abs/2310.08560)、[MCP Versioning](https://modelcontextprotocol.io/docs/learn/versioning)、[Position Interpolation](https://arxiv.org/abs/2306.15595)、[SSE](https://w3c.github.io/eventsource/)、[Representation Engineering](https://arxiv.org/abs/2310.01405)、[Contrastive Decoding](https://arxiv.org/abs/2210.15097)、[Semantic Entropy](https://arxiv.org/abs/2302.09664)、[ROME](https://arxiv.org/abs/2202.05262)、[LLM Watermark](https://arxiv.org/abs/2301.10226)、[Prompt Tuning](https://arxiv.org/abs/2104.08691)、[Adaptive Test-Time Compute](https://arxiv.org/abs/2604.14853)、[Sparse Autoencoders](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html)、[HyDE](https://arxiv.org/abs/2212.10496)、[ReAct](https://arxiv.org/abs/2210.03629) 与 [Toolformer](https://arxiv.org/abs/2302.04761)。
