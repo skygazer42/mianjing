@@ -2,7 +2,7 @@
 
 这一组继续采用“一道面试问题一本 Notebook”，覆盖 QK-Norm 与 logit softcapping、Mixture-of-Depths、LayerSkip、BitNet b1.58、masked diffusion language model、KTO、RLOO、Self-RAG、CRAG、LATS、POMDP Agent Loop 和长期记忆治理。
 
-每本先给出可直接用于面试的回答主线，再用 Python、NumPy 或 PyTorch 基础算子手写核心公式、模型模块或有界状态机。代码单元均包含解释设计意图和边界的中文注释，并用受控数据与断言验证不变量；这些教学实现不冒充训练大模型的质量、线上吞吐或真实工具环境的安全性。
+每本先给出可直接用于面试的回答主线，再用 Python、NumPy 或 PyTorch 基础算子手写核心公式、模型模块或有界状态机。本组每个有效代码行均带中文行内注释；空行、纯注释行和多行字符串内容不作为代码行计数。教学代码同时用受控数据与断言验证不变量，不冒充训练大模型的质量、线上吞吐或真实工具环境的安全性。
 
 ## Notebook 索引
 
