@@ -1,6 +1,6 @@
 # LLM 推理优化与 Agent 训练面试题
 
-这一组继续采用“一道面试问题一本 Notebook”，从 EAGLE 特征级推测解码、H₂O heavy-hitter KV cache、Native Sparse Attention 与 Agent Lightning 式轨迹切片/credit assignment，延伸到有状态 Tool-Agent-User 评测、代码 Agent 沙箱、可中断 KV 恢复、工具副作用补偿、多 Agent 委派、上下文压缩、MCP 契约、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子分块/回填、HyDE 假设文档锚定、Agent 工具错误恢复、KV cache 量化、LoRA 多租户服务、batch-invariant 采样、stop sequence 安全提交、Contextual Retrieval、RAPTOR、长上下文位置鲁棒性、Agent 停滞检测、Text-to-SQL、GraphRAG、时态 RAG、指令层级冲突控制、Web Research Agent 的证据账本、版面多模态 RAG、代码库符号检索、训练数据 PII 治理、checkpoint 制品兼容、MCP OAuth、工具后置条件、反馈记忆冲突治理、Medusa 树验证、CUDA Graph 调度、SimPO、DOM 浏览器 Agent、DoRA、持续预训练、前缀缓存感知路由和 JIT 凭据代理。
+这一组继续采用“一道面试问题一本 Notebook”，从 EAGLE 特征级推测解码、H₂O heavy-hitter KV cache、Native Sparse Attention 与 Agent Lightning 式轨迹切片/credit assignment，延伸到有状态 Tool-Agent-User 评测、代码 Agent 沙箱、可中断 KV 恢复、工具副作用补偿、多 Agent 委派、上下文压缩、MCP 契约、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子分块/回填、HyDE 假设文档锚定、Agent 工具错误恢复、KV cache 量化、LoRA 多租户服务、batch-invariant 采样、stop sequence 安全提交、Contextual Retrieval、RAPTOR、长上下文位置鲁棒性、Agent 停滞检测、Text-to-SQL、GraphRAG、时态 RAG、指令层级冲突控制、Web Research Agent 的证据账本、版面多模态 RAG、代码库符号检索、训练数据 PII 治理、checkpoint 制品兼容、MCP OAuth、工具后置条件、反馈记忆冲突治理、Medusa 树验证、CUDA Graph 调度、SimPO、DOM 浏览器 Agent、DoRA、持续预训练、前缀缓存感知路由、JIT 凭据代理、ORPO、弹性训练恢复、请求取消/背压和工具供应链完整性。
 
 每本使用 Python、NumPy 与标准库手写关键状态机、缓存或训练数据合同。每个有效代码行都有中文行内注释；小数据断言只验证实现不变量，不代表大模型吞吐、真实工具安全或线上泛化。
 
@@ -64,6 +64,10 @@
 | 240 | [LLM 持续预训练、Replay 与遗忘门禁](./240-llm-continual-pretraining-replay-forgetting-from-scratch-pytorch.ipynb) | 新领域数据到来后怎样 rewarm 学习率、混合旧域 replay，并用 general/domain 矩阵控制灾难性遗忘？ |
 | 241 | [前缀缓存感知 LLM 副本路由](./241-prefix-cache-aware-llm-replica-routing-from-scratch.ipynb) | 怎样在 prefix KV 命中、队列等待、容量、租户隔离与公平之间选择副本，并处理陈旧目录？ |
 | 242 | [Agent JIT Credential Broker 与无密钥工具执行](./242-agent-jit-credential-broker-secretless-tools-from-scratch.ipynb) | 怎样让模型只拿一次性 capability，由隔离 broker 代用凭据，并校验 audience/scope/TTL/参数与重放？ |
+| 243 | [ORPO 单阶段 Odds-Ratio 偏好优化](./243-orpo-odds-ratio-monolithic-preference-optimization-from-scratch-pytorch.ipynb) | 怎样把 chosen SFT NLL 与 rejected odds-ratio penalty 合并为无需 reference model 的单阶段目标，并验证数值和梯度？ |
+| 244 | [弹性分布式 LLM 训练与 Checkpoint 恢复](./244-elastic-distributed-llm-training-checkpoint-recovery-from-scratch.ipynb) | worker failure 或 membership change 后怎样重新 rendezvous、全员重启，并恢复不依赖 rank/world-size 的模型、数据、优化器与 RNG 状态？ |
+| 245 | [LLM Serving 请求取消、背压与 KV 释放](./245-llm-serving-request-cancellation-backpressure-kv-release-from-scratch.ipynb) | 怎样处理断连/取消、队列准入、in-flight 竞态、幂等 abort、terminal event 与 KV block 精确回收？ |
+| 246 | [Agent 工具供应链签名 Manifest 与来源](./246-agent-tool-supply-chain-signed-manifest-provenance-from-scratch.ipynb) | 怎样验签 publisher、schema、description、artifact 与 permission，绑定 plan digest，并阻断 tool poisoning、暗改与权限扩大？ |
 
 ## 建议学习路线
 
@@ -83,6 +87,7 @@
 14. 运行 231–234：把模型和 Agent 的制品、身份、行动结果与经验记忆都变成可验证合同，避免“能加载、拿到 token、返回 ok 或写入记忆”被误当成正确性。
 15. 运行 235–238：从多 token 推测和 GPU replay 的推理优化进入 reference-free 偏好学习，最后把浏览器 Agent 的观察、动作与功能成功绑定到可验证页面状态。
 16. 运行 239–242：从参数高效适配和持续预训练的能力—遗忘权衡，进入多副本 cache locality 调度与 Agent 最小权限的即时凭据执行。
+17. 运行 243–246：比较 ORPO 单阶段偏好目标与已有 DPO/SimPO，再把长时训练和在线推理的失败恢复、以及 Agent 工具供应链纳入一致状态和完整性门禁。
 
 ## 主要研究入口
 
@@ -91,5 +96,7 @@
 本批参考 [Medusa](https://arxiv.org/abs/2401.10774)、[vLLM CUDA Graphs](https://docs.vllm.ai/en/latest/design/cuda_graphs/)、[SimPO](https://arxiv.org/abs/2405.14734)、[WebArena](https://arxiv.org/abs/2307.13854) 与 [BrowserGym](https://arxiv.org/abs/2412.05467)。
 
 本批补充参考 [DoRA](https://arxiv.org/abs/2402.09353)、[Continual Pre-Training](https://arxiv.org/abs/2308.04014)、[Preble](https://arxiv.org/abs/2407.00023) 与 [Agentic AI Secure Adoption](https://www.cyber.gov.au/business-government/secure-design/artificial-intelligence/careful-adoption-of-agentic-ai-services)。
+
+本批参考 [ORPO](https://arxiv.org/abs/2403.07691)、[PyTorch Elastic](https://docs.pytorch.org/docs/stable/elastic/run)、[vLLM Abort Race](https://github.com/vllm-project/vllm/issues/26400)、[OWASP MCP Tool Poisoning](https://owasp.org/www-community/attacks/MCP_Tool_Poisoning) 与 [NSA MCP Security](https://media.defense.gov/2026/Jun/02/2003943289/-1/-1/0/CSI_MCP_SECURITY.PDF)。
 
 参考 [EAGLE](https://arxiv.org/abs/2401.15077)、[H₂O](https://arxiv.org/abs/2306.14048)、[Native Sparse Attention](https://arxiv.org/abs/2502.11089)、[Agent Lightning](https://arxiv.org/abs/2508.03680)、[τ-bench](https://arxiv.org/abs/2406.12045)、[SWE-bench](https://arxiv.org/abs/2310.06770)、[INFERCEPT](https://arxiv.org/abs/2402.01869)、[AutoGen](https://arxiv.org/abs/2308.08155)、[MemGPT](https://arxiv.org/abs/2310.08560)、[MCP Versioning](https://modelcontextprotocol.io/docs/learn/versioning)、[Position Interpolation](https://arxiv.org/abs/2306.15595)、[SSE](https://w3c.github.io/eventsource/)、[Representation Engineering](https://arxiv.org/abs/2310.01405)、[Contrastive Decoding](https://arxiv.org/abs/2210.15097)、[Semantic Entropy](https://arxiv.org/abs/2302.09664)、[ROME](https://arxiv.org/abs/2202.05262)、[LLM Watermark](https://arxiv.org/abs/2301.10226)、[Prompt Tuning](https://arxiv.org/abs/2104.08691)、[Adaptive Test-Time Compute](https://arxiv.org/abs/2604.14853)、[Sparse Autoencoders](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html)、[HyDE](https://arxiv.org/abs/2212.10496)、[ReAct](https://arxiv.org/abs/2210.03629)、[Toolformer](https://arxiv.org/abs/2302.04761)、[KIVI](https://arxiv.org/abs/2402.02750)、[S-LoRA](https://arxiv.org/abs/2311.03285)、[vLLM Reproducibility](https://docs.vllm.ai/en/v0.9.1/usage/reproducibility.html)、[Transformers StopStringCriteria](https://huggingface.co/docs/transformers/en/internal/generation_utils)、[Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval)、[RAPTOR](https://arxiv.org/abs/2401.18059)、[Lost in the Middle](https://arxiv.org/abs/2307.03172)、[AgentBench](https://arxiv.org/abs/2308.03688)、[PICARD](https://arxiv.org/abs/2109.05093)、[Microsoft GraphRAG](https://microsoft.github.io/graphrag//query/overview/)、[IA-RAG](https://arxiv.org/abs/2606.06044)、[Model Spec Chain of Command](https://model-spec.openai.com/2025-02-12.html)、[WebGPT](https://arxiv.org/abs/2112.09332)、[SK-VQA](https://arxiv.org/abs/2406.19593)、[RepoCoder](https://arxiv.org/abs/2303.12570) 与 [Training Data Extraction](https://arxiv.org/abs/2012.07805)。
