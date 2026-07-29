@@ -304,7 +304,7 @@
 
 ## 第十七组：LLM 推理优化与 Agent 训练面试题
 
-这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子 RAG 回填、HyDE grounding、Agent 错误恢复、KV cache 非对称量化、LoRA adapter 池、批处理随机性与 stop string 提交。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
+这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子 RAG 回填、HyDE grounding、Agent 错误恢复、KV cache 非对称量化、LoRA adapter 池、批处理随机性、stop string 提交、Contextual Retrieval、RAPTOR 分层树、长上下文位置评测与 Agent 停滞 gate。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
 
 | 编号 | Notebook 回答 | 面试问题 |
 | --- | --- | --- |
@@ -340,6 +340,10 @@
 | 216 | [S-LoRA 多 Adapter 服务与版本化内存池](../27-llm-inference-agent-training-interview-questions/216-slora-multi-adapter-serving-versioned-pool-from-scratch.ipynb) | base+delta forward、租户授权、refcount 驱逐、兼容 batch、池满排队与不可变热更新怎样实现？ |
 | 217 | [连续批处理 Batch-Invariant 随机采样](../27-llm-inference-agent-training-interview-questions/217-llm-continuous-batching-batch-invariant-sampling-from-scratch.ipynb) | request/step/seed 坐标 RNG、CDF sample、调度重排、全局 RNG 反例、trace 与版本 gate 怎样实现？ |
 | 218 | [LLM 流式 Stop Sequence 安全提交](../27-llm-inference-agent-training-interview-questions/218-llm-streaming-stop-sequence-safe-commit-from-scratch.ipynb) | 前缀缓冲、跨 chunk 匹配、flush、overlap、finish reason 与 stop 配置门禁怎样实现？ |
+| 219 | [RAG Contextual Retrieval 与来源版本](../27-llm-inference-agent-training-interview-questions/219-rag-contextual-retrieval-provenance-versioning-from-scratch.ipynb) | contextual index text、raw evidence、ACL、context model/version、失效和检索/引用双指标怎样实现？ |
+| 220 | [RAPTOR 分层摘要检索与来源链](../27-llm-inference-agent-training-interview-questions/220-raptor-hierarchical-summary-retrieval-provenance-from-scratch.ipynb) | leaf、聚类、summary tree、level route、展开 evidence、树失效与错误传播怎样实现？ |
+| 221 | [长上下文 Needle 位置鲁棒性评测](../27-llm-inference-agent-training-interview-questions/221-llm-long-context-needle-position-robustness-evaluation-from-scratch.ipynb) | 长度×位置×干扰、答案 parser、无答案/冲突对照、切片统计与版本可比性怎样实现？ |
+| 222 | [Agent Loop 停滞检测与停止策略](../27-llm-inference-agent-training-interview-questions/222-agent-loop-stagnation-fingerprint-budget-stop-policy-from-scratch.ipynb) | action/state fingerprint、progress、budget、side-effect retry、fallback/escalation 和误杀评测怎样实现？ |
 
 ## 推荐学习顺序
 
@@ -363,7 +367,7 @@
 18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
 19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
 20. 继续运行 `175–180 -> 181–186`：先比较动态计算、低比特与扩散生成的 correctness oracle，再串联偏好优化、Agentic RAG、树搜索、belief state 和长期记忆治理。
-21. 继续运行 `187–214 -> 215–218`：在推理、Agent、表征、知识与发布边界之上，补齐稀疏特征检查、分层检索/HyDE 的真实证据约束、工具错误恢复，再进入 KV 量化、adapter 池、并发采样和流式终止的服务合同。
+21. 继续运行 `187–218 -> 219–222`：在推理、Agent、表征、知识与发布边界之上，补齐上下文化/分层检索的来源链、长上下文位置切片，以及以进展、预算和副作用区分 Agent 正常推进与真正停滞的控制面。
 
 ## 统一验收标准
 
