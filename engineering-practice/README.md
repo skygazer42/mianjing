@@ -304,7 +304,7 @@
 
 ## 第十七组：LLM 推理优化与 Agent 训练面试题
 
-这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema 与动作前审批。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
+这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用与 chat template。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
 
 | 编号 | Notebook 回答 | 面试问题 |
 | --- | --- | --- |
@@ -320,6 +320,10 @@
 | 196 | [Agent Context 压缩与检索恢复](../27-llm-inference-agent-training-interview-questions/196-agent-context-compaction-retrieval-from-scratch.ipynb) | pinned 约束、预算、摘要覆盖范围、版本失配和原文 evidence retrieval 怎样实现？ |
 | 197 | [MCP Tool Schema 版本与契约测试](../27-llm-inference-agent-training-interview-questions/197-mcp-tool-schema-versioning-contract-tests-from-scratch.ipynb) | protocol negotiation、schema validation、adapter、错误闭合与 golden contract tests 怎样实现？ |
 | 198 | [Agent 动作前审批与 Policy Gate](../27-llm-inference-agent-training-interview-questions/198-agent-pre-action-approval-policy-gate-from-scratch.ipynb) | 风险分级、参数 digest、一次性 approval、过期/重放拒绝与审计怎样实现？ |
+| 199 | [RoPE 长上下文缩放](../27-llm-inference-agent-training-interview-questions/199-rope-long-context-scaling-from-scratch.ipynb) | RoPE 相对位置、PI/YaRN 缩放、频率表、KV 坐标版本和短/长窗口评测怎样验证？ |
+| 200 | [LLM 流式 API 事件与恢复](../27-llm-inference-agent-training-interview-questions/200-llm-streaming-events-sse-resume-from-scratch.ipynb) | delta 分类、sequence、terminal、usage、断连 replay、错误和流式指标怎样实现？ |
+| 201 | [Agent 并行 Tool Call 一致性](../27-llm-inference-agent-training-interview-questions/201-agent-parallel-tool-call-id-consistency-from-scratch.ipynb) | call id、并行 dispatch、乱序 result commit、顺序 join、重复拒绝和 result ledger 怎样实现？ |
+| 202 | [Chat Template 训练/服务一致性](../27-llm-inference-agent-training-interview-questions/202-chat-template-train-serving-compatibility-from-scratch.ipynb) | role token、tool call id、generation prompt、template fingerprint 与 golden rendering 怎样实现？ |
 
 ## 推荐学习顺序
 
@@ -343,7 +347,7 @@
 18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
 19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
 20. 继续运行 `175–180 -> 181–186`：先比较动态计算、低比特与扩散生成的 correctness oracle，再串联偏好优化、Agentic RAG、树搜索、belief state 和长期记忆治理。
-21. 继续运行 `187–194 -> 195–198`：先验证推理/训练状态、工具评测、代码修复、KV 恢复与副作用补偿，再用同样的能力、版本和审计合同扩展到多 Agent、context engineering、MCP schema 演进和动作前审批。
+21. 继续运行 `187–198 -> 199–202`：先验证推理/训练状态、Agent 可靠性与治理，再把同样的版本、顺序和状态合同落到 RoPE 长上下文、流式输出、并行 tool call 及 chat template 的训练—服务边界。
 
 ## 统一验收标准
 
