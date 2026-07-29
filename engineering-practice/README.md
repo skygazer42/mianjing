@@ -304,7 +304,7 @@
 
 ## 第十七组：LLM 推理优化与 Agent 训练面试题
 
-这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子 RAG 回填、HyDE grounding、Agent 错误恢复、KV cache 非对称量化、LoRA adapter 池、批处理随机性、stop string 提交、Contextual Retrieval、RAPTOR 分层树、长上下文位置评测、Agent 停滞 gate、Text-to-SQL AST、GraphRAG local/global、valid-time RAG、指令权威解析、Web Research 证据账本、版面多模态 RAG、代码库符号检索与训练数据 PII 治理。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
+这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子 RAG 回填、HyDE grounding、Agent 错误恢复、KV cache 非对称量化、LoRA adapter 池、批处理随机性、stop string 提交、Contextual Retrieval、RAPTOR 分层树、长上下文位置评测、Agent 停滞 gate、Text-to-SQL AST、GraphRAG local/global、valid-time RAG、指令权威解析、Web Research 证据账本、版面多模态 RAG、代码库符号检索、训练数据 PII 治理、checkpoint 制品兼容、MCP OAuth、工具后置条件和反馈记忆冲突治理。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
 
 | 编号 | Notebook 回答 | 面试问题 |
 | --- | --- | --- |
@@ -352,6 +352,10 @@
 | 228 | [多模态 RAG 版面 Region 与表格证据](../27-llm-inference-agent-training-interview-questions/228-multimodal-rag-layout-region-table-evidence-from-scratch.ipynb) | page/bbox/模态检索、text/table/image route、OCR 低置信、证据引用与版本 gate 怎样实现？ |
 | 229 | [Code RAG 符号、依赖与版本上下文](../27-llm-inference-agent-training-interview-questions/229-code-rag-symbol-dependency-versioned-context-from-scratch.ipynb) | symbol 检索、有限 hop dependency/test 展开、token budget、版本门禁与 patch plan 怎样实现？ |
 | 230 | [LLM 训练数据 PII 治理、删除与审计](../27-llm-inference-agent-training-interview-questions/230-llm-training-data-pii-governance-deletion-audit-from-scratch.ipynb) | source/license/PII span、manifest/tombstone、删除请求、授权 canary 与泄露审计怎样实现？ |
+| 231 | [LLM Checkpoint Manifest、分片与兼容性](../27-llm-inference-agent-training-interview-questions/231-llm-checkpoint-manifest-shards-compatibility-from-scratch.ipynb) | bundle revision、index/shard、key/shape/hash、tokenizer/template/dtype gate 与原子发布怎样实现？ |
+| 232 | [MCP OAuth Resource 与 Audience 授权](../27-llm-inference-agent-training-interview-questions/232-mcp-oauth-resource-audience-authorization-from-scratch.ipynb) | resource metadata、PKCE、audience/scope/expiry、token cache partition 与 downstream token 怎样实现？ |
+| 233 | [Agent Tool 后置条件与 State Diff 验证](../27-llm-inference-agent-training-interview-questions/233-agent-tool-postcondition-state-diff-verification-from-scratch.ipynb) | precondition、invocation id、权威回读、state diff、policy verifier 与 safe/unsafe success 怎样实现？ |
+| 234 | [Agent 反馈记忆冲突与来源治理](../27-llm-inference-agent-training-interview-questions/234-agent-feedback-memory-conflict-provenance-from-scratch.ipynb) | feedback admission、provenance/revision、ACL/TTL、tombstone、冲突 resolver 与投毒评测怎样实现？ |
 
 ## 推荐学习顺序
 
@@ -375,7 +379,7 @@
 18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
 19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
 20. 继续运行 `175–180 -> 181–186`：先比较动态计算、低比特与扩散生成的 correctness oracle，再串联偏好优化、Agentic RAG、树搜索、belief state 和长期记忆治理。
-21. 继续运行 `187–226 -> 227–230`：在推理、Agent、表征、知识与发布边界之上，把浏览结果收束为主张证据账本，扩展到版面/表格、代码符号和训练数据的版本、权限、删除与泄露审计。
+21. 继续运行 `187–230 -> 231–234`：在推理、Agent、表征、知识与发布边界之上，把模型制品、OAuth 身份、工具后置条件和反馈记忆都纳入可验证的版本、权限、状态差分与冲突治理合同。
 
 ## 统一验收标准
 

@@ -1,6 +1,6 @@
 # LLM 推理优化与 Agent 训练面试题
 
-这一组继续采用“一道面试问题一本 Notebook”，从 EAGLE 特征级推测解码、H₂O heavy-hitter KV cache、Native Sparse Attention 与 Agent Lightning 式轨迹切片/credit assignment，延伸到有状态 Tool-Agent-User 评测、代码 Agent 沙箱、可中断 KV 恢复、工具副作用补偿、多 Agent 委派、上下文压缩、MCP 契约、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子分块/回填、HyDE 假设文档锚定、Agent 工具错误恢复、KV cache 量化、LoRA 多租户服务、batch-invariant 采样、stop sequence 安全提交、Contextual Retrieval、RAPTOR、长上下文位置鲁棒性、Agent 停滞检测、Text-to-SQL、GraphRAG、时态 RAG、指令层级冲突控制、Web Research Agent 的证据账本、版面多模态 RAG、代码库符号检索与训练数据 PII 治理。
+这一组继续采用“一道面试问题一本 Notebook”，从 EAGLE 特征级推测解码、H₂O heavy-hitter KV cache、Native Sparse Attention 与 Agent Lightning 式轨迹切片/credit assignment，延伸到有状态 Tool-Agent-User 评测、代码 Agent 沙箱、可中断 KV 恢复、工具副作用补偿、多 Agent 委派、上下文压缩、MCP 契约、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子分块/回填、HyDE 假设文档锚定、Agent 工具错误恢复、KV cache 量化、LoRA 多租户服务、batch-invariant 采样、stop sequence 安全提交、Contextual Retrieval、RAPTOR、长上下文位置鲁棒性、Agent 停滞检测、Text-to-SQL、GraphRAG、时态 RAG、指令层级冲突控制、Web Research Agent 的证据账本、版面多模态 RAG、代码库符号检索、训练数据 PII 治理、checkpoint 制品兼容、MCP OAuth、工具后置条件和反馈记忆冲突治理。
 
 每本使用 Python、NumPy 与标准库手写关键状态机、缓存或训练数据合同。每个有效代码行都有中文行内注释；小数据断言只验证实现不变量，不代表大模型吞吐、真实工具安全或线上泛化。
 
@@ -52,6 +52,10 @@
 | 228 | [多模态 RAG 版面 Region 与表格证据](./228-multimodal-rag-layout-region-table-evidence-from-scratch.ipynb) | 怎样以 page/bbox/模态为检索与引用单位，路由 text/table/image，并处理 OCR 低置信与版本？ |
 | 229 | [Code RAG 符号、依赖与版本上下文](./229-code-rag-symbol-dependency-versioned-context-from-scratch.ipynb) | 怎样按 symbol 检索、有限 hop 展开依赖/测试、控制预算并阻止过期代码进入 patch 规划？ |
 | 230 | [LLM 训练数据 PII 治理、删除与审计](./230-llm-training-data-pii-governance-deletion-audit-from-scratch.ipynb) | 怎样记录来源/许可/PII span、治理 manifest/tombstone、处理删除请求，并用授权 canary 监控泄露？ |
+| 231 | [LLM Checkpoint Manifest、分片与兼容性](./231-llm-checkpoint-manifest-shards-compatibility-from-scratch.ipynb) | 怎样以 manifest/index/shard/shape/hash 与 tokenizer、模板、dtype、base revision 门禁安全加载并原子发布？ |
+| 232 | [MCP OAuth Resource 与 Audience 授权](./232-mcp-oauth-resource-audience-authorization-from-scratch.ipynb) | 怎样发现元数据、申请 resource-bound token、验证 audience/scope/过期，并阻止 token passthrough？ |
+| 233 | [Agent Tool 后置条件与 State Diff 验证](./233-agent-tool-postcondition-state-diff-verification-from-scratch.ipynb) | 怎样用 precondition、invocation id、权威回读、state diff 和 policy verifier 区分安全成功、未验证和失败？ |
+| 234 | [Agent 反馈记忆冲突与来源治理](./234-agent-feedback-memory-conflict-provenance-from-scratch.ipynb) | 怎样将反馈变为版本化、可验证、可撤销且 ACL 隔离的长期记忆，并确定性解析冲突？ |
 
 ## 建议学习路线
 
@@ -68,7 +72,10 @@
 11. 运行 219–222：把检索从孤立 chunk 推进到可追溯的文档/层级结构，再用位置切片测试长上下文，最后把 Agent 的“何时继续”落为确定的进展、预算与副作用门禁。
 12. 运行 223–226：将自然语言请求落为受控 SQL/图谱/时态事实合同，并把 Agent 的指令权威、外部内容信任和 action 授权分层处理。
 13. 运行 227–230：把 Agent 的检索/浏览收束为证据账本，扩展到带版面与表格的多模态知识、代码库 API 上下文，以及训练数据的隐私、删除与审计。
+14. 运行 231–234：把模型和 Agent 的制品、身份、行动结果与经验记忆都变成可验证合同，避免“能加载、拿到 token、返回 ok 或写入记忆”被误当成正确性。
 
 ## 主要研究入口
+
+补充参考 [Hugging Face Sharded Checkpoint](https://huggingface.co/docs/transformers/main/big_models)、[MCP Authorization](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization)、[STATE-Bench](https://github.com/microsoft/STATE-Bench) 与 [Memory Conflict Resolution](https://arxiv.org/abs/2606.01435)。
 
 参考 [EAGLE](https://arxiv.org/abs/2401.15077)、[H₂O](https://arxiv.org/abs/2306.14048)、[Native Sparse Attention](https://arxiv.org/abs/2502.11089)、[Agent Lightning](https://arxiv.org/abs/2508.03680)、[τ-bench](https://arxiv.org/abs/2406.12045)、[SWE-bench](https://arxiv.org/abs/2310.06770)、[INFERCEPT](https://arxiv.org/abs/2402.01869)、[AutoGen](https://arxiv.org/abs/2308.08155)、[MemGPT](https://arxiv.org/abs/2310.08560)、[MCP Versioning](https://modelcontextprotocol.io/docs/learn/versioning)、[Position Interpolation](https://arxiv.org/abs/2306.15595)、[SSE](https://w3c.github.io/eventsource/)、[Representation Engineering](https://arxiv.org/abs/2310.01405)、[Contrastive Decoding](https://arxiv.org/abs/2210.15097)、[Semantic Entropy](https://arxiv.org/abs/2302.09664)、[ROME](https://arxiv.org/abs/2202.05262)、[LLM Watermark](https://arxiv.org/abs/2301.10226)、[Prompt Tuning](https://arxiv.org/abs/2104.08691)、[Adaptive Test-Time Compute](https://arxiv.org/abs/2604.14853)、[Sparse Autoencoders](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html)、[HyDE](https://arxiv.org/abs/2212.10496)、[ReAct](https://arxiv.org/abs/2210.03629)、[Toolformer](https://arxiv.org/abs/2302.04761)、[KIVI](https://arxiv.org/abs/2402.02750)、[S-LoRA](https://arxiv.org/abs/2311.03285)、[vLLM Reproducibility](https://docs.vllm.ai/en/v0.9.1/usage/reproducibility.html)、[Transformers StopStringCriteria](https://huggingface.co/docs/transformers/en/internal/generation_utils)、[Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval)、[RAPTOR](https://arxiv.org/abs/2401.18059)、[Lost in the Middle](https://arxiv.org/abs/2307.03172)、[AgentBench](https://arxiv.org/abs/2308.03688)、[PICARD](https://arxiv.org/abs/2109.05093)、[Microsoft GraphRAG](https://microsoft.github.io/graphrag//query/overview/)、[IA-RAG](https://arxiv.org/abs/2606.06044)、[Model Spec Chain of Command](https://model-spec.openai.com/2025-02-12.html)、[WebGPT](https://arxiv.org/abs/2112.09332)、[SK-VQA](https://arxiv.org/abs/2406.19593)、[RepoCoder](https://arxiv.org/abs/2303.12570) 与 [Training Data Extraction](https://arxiv.org/abs/2012.07805)。
