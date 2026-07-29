@@ -304,7 +304,7 @@
 
 ## 第十七组：LLM 推理优化与 Agent 训练面试题
 
-这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用与 chat template。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
+这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy 与知识编辑。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
 
 | 编号 | Notebook 回答 | 面试问题 |
 | --- | --- | --- |
@@ -324,6 +324,10 @@
 | 200 | [LLM 流式 API 事件与恢复](../27-llm-inference-agent-training-interview-questions/200-llm-streaming-events-sse-resume-from-scratch.ipynb) | delta 分类、sequence、terminal、usage、断连 replay、错误和流式指标怎样实现？ |
 | 201 | [Agent 并行 Tool Call 一致性](../27-llm-inference-agent-training-interview-questions/201-agent-parallel-tool-call-id-consistency-from-scratch.ipynb) | call id、并行 dispatch、乱序 result commit、顺序 join、重复拒绝和 result ledger 怎样实现？ |
 | 202 | [Chat Template 训练/服务一致性](../27-llm-inference-agent-training-interview-questions/202-chat-template-train-serving-compatibility-from-scratch.ipynb) | role token、tool call id、generation prompt、template fingerprint 与 golden rendering 怎样实现？ |
+| 203 | [Activation Steering / Representation Engineering](../27-llm-inference-agent-training-interview-questions/203-activation-steering-representation-engineering-from-scratch.ipynb) | contrast direction、归一化、指定 layer/token 注入、剂量曲线、行为/任务/安全分桶评测怎样实现？ |
+| 204 | [Contrastive Decoding](../27-llm-inference-agent-training-interview-questions/204-contrastive-decoding-expert-amateur-from-scratch.ipynb) | expert/amateur token 对齐、plausibility constraint、log-ratio 分数、空候选与质量评测怎样实现？ |
+| 205 | [Semantic Entropy 不确定性与拒答](../27-llm-inference-agent-training-interview-questions/205-semantic-entropy-uncertainty-abstention-from-scratch.ipynb) | sample clustering、cluster mass entropy、多解/证据冲突、阈值校准与 risk-coverage 怎样实现？ |
+| 206 | [ROME 风格知识编辑](../27-llm-inference-agent-training-interview-questions/206-rome-rank-one-knowledge-editing-from-scratch.ipynb) | rank-one delta、rewrite、paraphrase generalization、locality、冲突版本与 rollback 怎样验证？ |
 
 ## 推荐学习顺序
 
@@ -347,7 +351,7 @@
 18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
 19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
 20. 继续运行 `175–180 -> 181–186`：先比较动态计算、低比特与扩散生成的 correctness oracle，再串联偏好优化、Agentic RAG、树搜索、belief state 和长期记忆治理。
-21. 继续运行 `187–198 -> 199–202`：先验证推理/训练状态、Agent 可靠性与治理，再把同样的版本、顺序和状态合同落到 RoPE 长上下文、流式输出、并行 tool call 及 chat template 的训练—服务边界。
+21. 继续运行 `187–202 -> 203–206`：先贯通推理、Agent 与输入/输出协议，再把同样的可验证边界推进到表征干预、对比解码、不确定性 gate 与知识编辑的 rewrite/generalization/locality 评测。
 
 ## 统一验收标准
 
