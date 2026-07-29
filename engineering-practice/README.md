@@ -304,7 +304,7 @@
 
 ## 第十七组：LLM 推理优化与 Agent 训练面试题
 
-这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
+这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV 和跨工具副作用。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
 
 | 编号 | Notebook 回答 | 面试问题 |
 | --- | --- | --- |
@@ -312,6 +312,10 @@
 | 188 | [H₂O Heavy-Hitter KV Cache](../27-llm-inference-agent-training-interview-questions/188-h2o-heavy-hitter-kv-cache-from-scratch.ipynb) | 累计 attention、recent window、heavy-hitter budget 与因果顺序怎样决定淘汰？ |
 | 189 | [Native Sparse Attention](../27-llm-inference-agent-training-interview-questions/189-native-sparse-attention-from-scratch.ipynb) | block selection、局部窗口、全局块、causal mask 与稀疏算量怎样实现？ |
 | 190 | [Agent Lightning 轨迹 Credit Assignment](../27-llm-inference-agent-training-interview-questions/190-agent-lightning-trajectory-credit-assignment-from-scratch.ipynb) | 如何把 Agent event trace 转为 transition、return-to-go、train/eval group split 与 rollout version gate？ |
+| 191 | [τ-bench 有状态工具评测](../27-llm-inference-agent-training-interview-questions/191-taubench-stateful-tool-agent-evaluation-from-scratch.ipynb) | 最终状态、用户确认、领域策略、工具 trace 与 pass^k 可靠性怎样一起评测？ |
+| 192 | [SWE-bench 代码 Agent 沙箱](../27-llm-inference-agent-training-interview-questions/192-swe-bench-code-agent-sandbox-from-scratch.ipynb) | inspect、revision gate、patch、可执行测试、最小 diff 与评分制品怎样实现？ |
+| 193 | [INFERCEPT 中断感知 Agent KV 恢复](../27-llm-inference-agent-training-interview-questions/193-infercept-interruption-aware-agent-kv-resume-from-scratch.ipynb) | tool/human interruption 怎样冻结 snapshot、正确复用 KV、预算准入或主动重算？ |
+| 194 | [Agent Saga、补偿与幂等](../27-llm-inference-agent-training-interview-questions/194-agent-saga-compensation-idempotency-from-scratch.ipynb) | 跨工具副作用怎样通过 idempotency key、逆序 compensation、审计和人工例外安全收束？ |
 
 ## 推荐学习顺序
 
@@ -335,7 +339,7 @@
 18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
 19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
 20. 继续运行 `175–180 -> 181–186`：先比较动态计算、低比特与扩散生成的 correctness oracle，再串联偏好优化、Agentic RAG、树搜索、belief state 和长期记忆治理。
-21. 继续运行 `187–189 -> 190`：先验证 target 精确提交、KV 预算和 sparse causal mask，再把同样的事件/版本合同用于 Agent RL trajectory credit assignment。
+21. 继续运行 `187–190 -> 191–194`：先验证 target 精确提交、KV 预算和 Agent 学习数据，再把同样的状态/版本合同扩展到有状态工具评测、代码修复、interruption-aware 恢复与副作用补偿。
 
 ## 统一验收标准
 
