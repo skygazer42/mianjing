@@ -304,7 +304,7 @@
 
 ## 第十七组：LLM 推理优化与 Agent 训练面试题
 
-这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子 RAG 回填、HyDE grounding、Agent 错误恢复、KV cache 非对称量化、LoRA adapter 池、批处理随机性、stop string 提交、Contextual Retrieval、RAPTOR 分层树、长上下文位置评测与 Agent 停滞 gate。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
+这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子 RAG 回填、HyDE grounding、Agent 错误恢复、KV cache 非对称量化、LoRA adapter 池、批处理随机性、stop string 提交、Contextual Retrieval、RAPTOR 分层树、长上下文位置评测、Agent 停滞 gate、Text-to-SQL AST、GraphRAG local/global、valid-time RAG 和指令权威解析。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
 
 | 编号 | Notebook 回答 | 面试问题 |
 | --- | --- | --- |
@@ -344,6 +344,10 @@
 | 220 | [RAPTOR 分层摘要检索与来源链](../27-llm-inference-agent-training-interview-questions/220-raptor-hierarchical-summary-retrieval-provenance-from-scratch.ipynb) | leaf、聚类、summary tree、level route、展开 evidence、树失效与错误传播怎样实现？ |
 | 221 | [长上下文 Needle 位置鲁棒性评测](../27-llm-inference-agent-training-interview-questions/221-llm-long-context-needle-position-robustness-evaluation-from-scratch.ipynb) | 长度×位置×干扰、答案 parser、无答案/冲突对照、切片统计与版本可比性怎样实现？ |
 | 222 | [Agent Loop 停滞检测与停止策略](../27-llm-inference-agent-training-interview-questions/222-agent-loop-stagnation-fingerprint-budget-stop-policy-from-scratch.ipynb) | action/state fingerprint、progress、budget、side-effect retry、fallback/escalation 和误杀评测怎样实现？ |
+| 223 | [Text-to-SQL Schema Linking 与 Policy Gate](../27-llm-inference-agent-training-interview-questions/223-text-to-sql-schema-linking-policy-gate-from-scratch.ipynb) | schema candidate、受限 AST、表/列/角色/租户/limit、参数 SQL、执行 evidence 与版本 gate 怎样实现？ |
+| 224 | [GraphRAG Local/Global Search 与来源](../27-llm-inference-agent-training-interview-questions/224-graphrag-local-global-community-provenance-from-scratch.ipynb) | entity/edge/chunk provenance、local neighborhood、community report map-reduce、raw evidence、ACL/version 和分层评测怎样实现？ |
+| 225 | [Temporal RAG 有效时间、冲突与引用](../27-llm-inference-agent-training-interview-questions/225-temporal-rag-valid-time-conflict-citation-from-scratch.ipynb) | valid/published time、time-first retrieval、conflict gate、interval citation、追加更新与时态指标怎样实现？ |
+| 226 | [Agent 指令层级冲突与来源控制](../27-llm-inference-agent-training-interview-questions/226-agent-instruction-hierarchy-conflict-provenance-from-scratch.ipynb) | authority、同级 clarify、external evidence、action gate、decision trace 与注入/误拒评测怎样实现？ |
 
 ## 推荐学习顺序
 
@@ -367,7 +371,7 @@
 18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
 19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
 20. 继续运行 `175–180 -> 181–186`：先比较动态计算、低比特与扩散生成的 correctness oracle，再串联偏好优化、Agentic RAG、树搜索、belief state 和长期记忆治理。
-21. 继续运行 `187–218 -> 219–222`：在推理、Agent、表征、知识与发布边界之上，补齐上下文化/分层检索的来源链、长上下文位置切片，以及以进展、预算和副作用区分 Agent 正常推进与真正停滞的控制面。
+21. 继续运行 `187–222 -> 223–226`：在推理、Agent、表征、知识与发布边界之上，将自然语言落为受控结构化查询、图谱/时态证据，并把指令优先级、外部数据与危险动作分成可审计的三道门。
 
 ## 统一验收标准
 
