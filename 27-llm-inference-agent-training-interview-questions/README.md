@@ -1,6 +1,6 @@
 # LLM 推理优化与 Agent 训练面试题
 
-这一组继续采用“一道面试问题一本 Notebook”，从 EAGLE 特征级推测解码、H₂O heavy-hitter KV cache、Native Sparse Attention 与 Agent Lightning 式轨迹切片/credit assignment，延伸到有状态 Tool-Agent-User 评测、代码 Agent 沙箱、可中断 KV 恢复、工具副作用补偿、多 Agent 委派、上下文压缩、MCP 契约、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy 与知识编辑。
+这一组继续采用“一道面试问题一本 Notebook”，从 EAGLE 特征级推测解码、H₂O heavy-hitter KV cache、Native Sparse Attention 与 Agent Lightning 式轨迹切片/credit assignment，延伸到有状态 Tool-Agent-User 评测、代码 Agent 沙箱、可中断 KV 恢复、工具副作用补偿、多 Agent 委派、上下文压缩、MCP 契约、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII 与 test-time compute 分配。
 
 每本使用 Python、NumPy 与标准库手写关键状态机、缓存或训练数据合同。每个有效代码行都有中文行内注释；小数据断言只验证实现不变量，不代表大模型吞吐、真实工具安全或线上泛化。
 
@@ -28,6 +28,10 @@
 | 204 | [Contrastive Decoding](./204-contrastive-decoding-expert-amateur-from-scratch.ipynb) | 怎样对齐 expert/amateur 概率、过滤不可信候选、计算对比分数，并验证质量、成本与失败边界？ |
 | 205 | [Semantic Entropy 不确定性与拒答](./205-semantic-entropy-uncertainty-abstention-from-scratch.ipynb) | 怎样把采样结果语义聚类、计算熵、避免多解误判，并以 risk-coverage 校准拒答阈值？ |
 | 206 | [ROME 风格知识编辑](./206-rome-rank-one-knowledge-editing-from-scratch.ipynb) | 怎样用 rank-one update 改写事实，同时验证 rewrite、paraphrase generalization、locality、冲突和回滚？ |
+| 207 | [LLM 绿色名单水印与检测](./207-llm-greenlist-watermark-detection-from-scratch.ipynb) | 怎样生成 green list、偏置采样、计算 z-score，并处理短文本、编辑攻击、阈值和密钥轮换？ |
+| 208 | [Soft Prompt Tuning](./208-soft-prompt-tuning-frozen-base-from-scratch.ipynb) | 怎样冻结基座并训练连续提示，将 prompt id、形状、模板、租户和评测作为发布制品管理？ |
+| 209 | [LLM 输出 PII Redaction Policy Gate](./209-llm-output-pii-redaction-policy-gate-from-scratch.ipynb) | 怎样扫描 PII span、按风险掩码或阻断、处理未知格式，并以最小化审计和 precision/recall 验收？ |
+| 210 | [自适应 Test-Time Compute 预算分配](./210-adaptive-test-time-compute-budget-allocation-from-scratch.ipynb) | 怎样按样本收益与成本分配采样/搜索预算，并评测质量、延迟、regret、公平与策略漂移？ |
 
 ## 建议学习路线
 
@@ -38,7 +42,8 @@
 5. 运行 195–198：再处理规模化协作与治理——带能力的 handoff、可恢复的上下文、MCP 工具演进和不可绕过的动作前审批。
 6. 运行 199–202：将底层 LLM 输入/输出契约补齐——位置坐标、流式事件、并行工具消息与 chat template 必须都可版本化、验证和复放。
 7. 运行 203–206：最后进入模型内部和不确定性——显式控制表征、对比式解码、语义级不确定性与可回滚的知识编辑都要有独立 oracle。
+8. 运行 207–210：把发布和推理控制面补齐——可检测来源、低成本多任务适配、输出侧隐私门禁，以及在全局预算下按样本分配 test-time compute。
 
 ## 主要研究入口
 
-参考 [EAGLE](https://arxiv.org/abs/2401.15077)、[H₂O](https://arxiv.org/abs/2306.14048)、[Native Sparse Attention](https://arxiv.org/abs/2502.11089)、[Agent Lightning](https://arxiv.org/abs/2508.03680)、[τ-bench](https://arxiv.org/abs/2406.12045)、[SWE-bench](https://arxiv.org/abs/2310.06770)、[INFERCEPT](https://arxiv.org/abs/2402.01869)、[AutoGen](https://arxiv.org/abs/2308.08155)、[MemGPT](https://arxiv.org/abs/2310.08560)、[MCP Versioning](https://modelcontextprotocol.io/docs/learn/versioning)、[Position Interpolation](https://arxiv.org/abs/2306.15595)、[SSE](https://w3c.github.io/eventsource/)、[Representation Engineering](https://arxiv.org/abs/2310.01405)、[Contrastive Decoding](https://arxiv.org/abs/2210.15097)、[Semantic Entropy](https://arxiv.org/abs/2302.09664) 与 [ROME](https://arxiv.org/abs/2202.05262)。
+参考 [EAGLE](https://arxiv.org/abs/2401.15077)、[H₂O](https://arxiv.org/abs/2306.14048)、[Native Sparse Attention](https://arxiv.org/abs/2502.11089)、[Agent Lightning](https://arxiv.org/abs/2508.03680)、[τ-bench](https://arxiv.org/abs/2406.12045)、[SWE-bench](https://arxiv.org/abs/2310.06770)、[INFERCEPT](https://arxiv.org/abs/2402.01869)、[AutoGen](https://arxiv.org/abs/2308.08155)、[MemGPT](https://arxiv.org/abs/2310.08560)、[MCP Versioning](https://modelcontextprotocol.io/docs/learn/versioning)、[Position Interpolation](https://arxiv.org/abs/2306.15595)、[SSE](https://w3c.github.io/eventsource/)、[Representation Engineering](https://arxiv.org/abs/2310.01405)、[Contrastive Decoding](https://arxiv.org/abs/2210.15097)、[Semantic Entropy](https://arxiv.org/abs/2302.09664)、[ROME](https://arxiv.org/abs/2202.05262)、[LLM Watermark](https://arxiv.org/abs/2301.10226)、[Prompt Tuning](https://arxiv.org/abs/2104.08691) 与 [Adaptive Test-Time Compute](https://arxiv.org/abs/2604.14853)。

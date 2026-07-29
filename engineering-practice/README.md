@@ -304,7 +304,7 @@
 
 ## 第十七组：LLM 推理优化与 Agent 训练面试题
 
-这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy 与知识编辑。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
+这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII 与 test-time compute 分配。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
 
 | 编号 | Notebook 回答 | 面试问题 |
 | --- | --- | --- |
@@ -328,6 +328,10 @@
 | 204 | [Contrastive Decoding](../27-llm-inference-agent-training-interview-questions/204-contrastive-decoding-expert-amateur-from-scratch.ipynb) | expert/amateur token 对齐、plausibility constraint、log-ratio 分数、空候选与质量评测怎样实现？ |
 | 205 | [Semantic Entropy 不确定性与拒答](../27-llm-inference-agent-training-interview-questions/205-semantic-entropy-uncertainty-abstention-from-scratch.ipynb) | sample clustering、cluster mass entropy、多解/证据冲突、阈值校准与 risk-coverage 怎样实现？ |
 | 206 | [ROME 风格知识编辑](../27-llm-inference-agent-training-interview-questions/206-rome-rank-one-knowledge-editing-from-scratch.ipynb) | rank-one delta、rewrite、paraphrase generalization、locality、冲突版本与 rollback 怎样验证？ |
+| 207 | [LLM 绿色名单水印与检测](../27-llm-inference-agent-training-interview-questions/207-llm-greenlist-watermark-detection-from-scratch.ipynb) | keyed green list、logit bias、z-score、阈值、攻击切片和 key rotation 怎样实现？ |
+| 208 | [Soft Prompt Tuning](../27-llm-inference-agent-training-interview-questions/208-soft-prompt-tuning-frozen-base-from-scratch.ipynb) | frozen base、连续 prompt forward/gradient、prompt registry、兼容性、租户隔离与发布制品怎样实现？ |
+| 209 | [LLM 输出 PII Redaction Policy Gate](../27-llm-inference-agent-training-interview-questions/209-llm-output-pii-redaction-policy-gate-from-scratch.ipynb) | span scan、right-to-left redaction、mask/block、未知格式、最小化审计和检测指标怎样实现？ |
+| 210 | [自适应 Test-Time Compute 预算分配](../27-llm-inference-agent-training-interview-questions/210-adaptive-test-time-compute-budget-allocation-from-scratch.ipynb) | value-cost 动作、全局组合预算 oracle、admission、regret、质量/成本/公平指标怎样实现？ |
 
 ## 推荐学习顺序
 
@@ -351,7 +355,7 @@
 18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
 19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
 20. 继续运行 `175–180 -> 181–186`：先比较动态计算、低比特与扩散生成的 correctness oracle，再串联偏好优化、Agentic RAG、树搜索、belief state 和长期记忆治理。
-21. 继续运行 `187–202 -> 203–206`：先贯通推理、Agent 与输入/输出协议，再把同样的可验证边界推进到表征干预、对比解码、不确定性 gate 与知识编辑的 rewrite/generalization/locality 评测。
+21. 继续运行 `187–206 -> 207–210`：先建立可验证的推理、Agent、表征和知识边界，再补齐生成来源水印、软提示发布、输出侧隐私门禁与按题分配的 test-time compute 控制面。
 
 ## 统一验收标准
 
