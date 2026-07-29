@@ -304,7 +304,7 @@
 
 ## 第十七组：LLM 推理优化与 Agent 训练面试题
 
-这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV 和跨工具副作用。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
+这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema 与动作前审批。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
 
 | 编号 | Notebook 回答 | 面试问题 |
 | --- | --- | --- |
@@ -316,6 +316,10 @@
 | 192 | [SWE-bench 代码 Agent 沙箱](../27-llm-inference-agent-training-interview-questions/192-swe-bench-code-agent-sandbox-from-scratch.ipynb) | inspect、revision gate、patch、可执行测试、最小 diff 与评分制品怎样实现？ |
 | 193 | [INFERCEPT 中断感知 Agent KV 恢复](../27-llm-inference-agent-training-interview-questions/193-infercept-interruption-aware-agent-kv-resume-from-scratch.ipynb) | tool/human interruption 怎样冻结 snapshot、正确复用 KV、预算准入或主动重算？ |
 | 194 | [Agent Saga、补偿与幂等](../27-llm-inference-agent-training-interview-questions/194-agent-saga-compensation-idempotency-from-scratch.ipynb) | 跨工具副作用怎样通过 idempotency key、逆序 compensation、审计和人工例外安全收束？ |
+| 195 | [多 Agent Supervisor/Worker 委派](../27-llm-inference-agent-training-interview-questions/195-multi-agent-supervisor-handoff-from-scratch.ipynb) | task、能力、预算、parent trace、输入版本、handoff 验收与循环上限怎样设计？ |
+| 196 | [Agent Context 压缩与检索恢复](../27-llm-inference-agent-training-interview-questions/196-agent-context-compaction-retrieval-from-scratch.ipynb) | pinned 约束、预算、摘要覆盖范围、版本失配和原文 evidence retrieval 怎样实现？ |
+| 197 | [MCP Tool Schema 版本与契约测试](../27-llm-inference-agent-training-interview-questions/197-mcp-tool-schema-versioning-contract-tests-from-scratch.ipynb) | protocol negotiation、schema validation、adapter、错误闭合与 golden contract tests 怎样实现？ |
+| 198 | [Agent 动作前审批与 Policy Gate](../27-llm-inference-agent-training-interview-questions/198-agent-pre-action-approval-policy-gate-from-scratch.ipynb) | 风险分级、参数 digest、一次性 approval、过期/重放拒绝与审计怎样实现？ |
 
 ## 推荐学习顺序
 
@@ -339,7 +343,7 @@
 18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
 19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
 20. 继续运行 `175–180 -> 181–186`：先比较动态计算、低比特与扩散生成的 correctness oracle，再串联偏好优化、Agentic RAG、树搜索、belief state 和长期记忆治理。
-21. 继续运行 `187–190 -> 191–194`：先验证 target 精确提交、KV 预算和 Agent 学习数据，再把同样的状态/版本合同扩展到有状态工具评测、代码修复、interruption-aware 恢复与副作用补偿。
+21. 继续运行 `187–194 -> 195–198`：先验证推理/训练状态、工具评测、代码修复、KV 恢复与副作用补偿，再用同样的能力、版本和审计合同扩展到多 Agent、context engineering、MCP schema 演进和动作前审批。
 
 ## 统一验收标准
 
