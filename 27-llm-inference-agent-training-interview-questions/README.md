@@ -1,6 +1,6 @@
 # LLM 推理优化与 Agent 训练面试题
 
-这一组继续采用“一道面试问题一本 Notebook”，从 EAGLE 特征级推测解码、H₂O heavy-hitter KV cache、Native Sparse Attention 与 Agent Lightning 式轨迹切片/credit assignment，延伸到有状态 Tool-Agent-User 评测、代码 Agent 沙箱、可中断 KV 恢复、工具副作用补偿、多 Agent 委派、上下文压缩、MCP 契约、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配，以及 SAE 稀疏特征、父子分块/回填、HyDE 假设文档锚定和 Agent 工具错误恢复。
+这一组继续采用“一道面试问题一本 Notebook”，从 EAGLE 特征级推测解码、H₂O heavy-hitter KV cache、Native Sparse Attention 与 Agent Lightning 式轨迹切片/credit assignment，延伸到有状态 Tool-Agent-User 评测、代码 Agent 沙箱、可中断 KV 恢复、工具副作用补偿、多 Agent 委派、上下文压缩、MCP 契约、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子分块/回填、HyDE 假设文档锚定、Agent 工具错误恢复，以及 KV cache 量化、LoRA 多租户服务、batch-invariant 采样和 stop sequence 安全提交。
 
 每本使用 Python、NumPy 与标准库手写关键状态机、缓存或训练数据合同。每个有效代码行都有中文行内注释；小数据断言只验证实现不变量，不代表大模型吞吐、真实工具安全或线上泛化。
 
@@ -36,6 +36,10 @@
 | 212 | [RAG 父子切块与上下文回填](./212-rag-parent-child-chunking-context-from-scratch.ipynb) | 怎样用 child 精确召回、parent 去重回填、ACL/版本门禁与双层引用同时控制上下文充分性和陈旧索引？ |
 | 213 | [HyDE Query Expansion、RRF 与 Grounding](./213-hyde-query-expansion-rrf-grounding-from-scratch.ipynb) | 怎样隔离假设文档、融合原 query/HyDE 候选、只用真实证据生成，并处理 hallucinated expansion？ |
 | 214 | [Agent Tool Error Recovery 与熔断](./214-agent-tool-error-recovery-circuit-breaker-from-scratch.ipynb) | 怎样分类 transient/permanent/unknown 错误，设计带幂等键的重试、熔断、fallback 与人工升级？ |
+| 215 | [KV Cache 非对称量化与异常值回退](./215-llm-kv-cache-asymmetric-quantization-outlier-fallback-from-scratch.ipynb) | 怎样定义 group-wise scale/zero、异常值 residual、版本门禁、attention oracle 和真实字节账本？ |
+| 216 | [S-LoRA 多 Adapter 服务与版本化内存池](./216-slora-multi-adapter-serving-versioned-pool-from-scratch.ipynb) | 怎样实现 base + LoRA delta、租户/base 授权、refcount 驱逐、兼容 batch 和不可变热更新？ |
+| 217 | [连续批处理的 Batch-Invariant 随机采样](./217-llm-continuous-batching-batch-invariant-sampling-from-scratch.ipynb) | 怎样以 request/step/seed 坐标 RNG 隔离采样，避免队列顺序影响输出，并正确声明复现边界？ |
+| 218 | [LLM 流式 Stop Sequence 安全提交](./218-llm-streaming-stop-sequence-safe-commit-from-scratch.ipynb) | 怎样跨 token/chunk 匹配 stop string，缓冲潜在前缀，并避免将停止串或尾部泄露给客户端？ |
 
 ## 建议学习路线
 
@@ -48,7 +52,8 @@
 7. 运行 203–206：最后进入模型内部和不确定性——显式控制表征、对比式解码、语义级不确定性与可回滚的知识编辑都要有独立 oracle。
 8. 运行 207–210：把发布和推理控制面补齐——可检测来源、低成本多任务适配、输出侧隐私门禁，以及在全局预算下按样本分配 test-time compute。
 9. 运行 211–214：再把表征可解释性、分层检索/证据锚定与 Agent 的失败恢复连成闭环；其中 HyDE 只能扩展检索候选，绝不能充当最终事实证据。
+10. 运行 215–218：最后回到服务内核，比较低比特 KV 的误差账本、adapter 与 KV 的共享资源、并发采样的可审计随机性，以及流式生成的安全终止语义。
 
 ## 主要研究入口
 
-参考 [EAGLE](https://arxiv.org/abs/2401.15077)、[H₂O](https://arxiv.org/abs/2306.14048)、[Native Sparse Attention](https://arxiv.org/abs/2502.11089)、[Agent Lightning](https://arxiv.org/abs/2508.03680)、[τ-bench](https://arxiv.org/abs/2406.12045)、[SWE-bench](https://arxiv.org/abs/2310.06770)、[INFERCEPT](https://arxiv.org/abs/2402.01869)、[AutoGen](https://arxiv.org/abs/2308.08155)、[MemGPT](https://arxiv.org/abs/2310.08560)、[MCP Versioning](https://modelcontextprotocol.io/docs/learn/versioning)、[Position Interpolation](https://arxiv.org/abs/2306.15595)、[SSE](https://w3c.github.io/eventsource/)、[Representation Engineering](https://arxiv.org/abs/2310.01405)、[Contrastive Decoding](https://arxiv.org/abs/2210.15097)、[Semantic Entropy](https://arxiv.org/abs/2302.09664)、[ROME](https://arxiv.org/abs/2202.05262)、[LLM Watermark](https://arxiv.org/abs/2301.10226)、[Prompt Tuning](https://arxiv.org/abs/2104.08691)、[Adaptive Test-Time Compute](https://arxiv.org/abs/2604.14853)、[Sparse Autoencoders](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html)、[HyDE](https://arxiv.org/abs/2212.10496)、[ReAct](https://arxiv.org/abs/2210.03629) 与 [Toolformer](https://arxiv.org/abs/2302.04761)。
+参考 [EAGLE](https://arxiv.org/abs/2401.15077)、[H₂O](https://arxiv.org/abs/2306.14048)、[Native Sparse Attention](https://arxiv.org/abs/2502.11089)、[Agent Lightning](https://arxiv.org/abs/2508.03680)、[τ-bench](https://arxiv.org/abs/2406.12045)、[SWE-bench](https://arxiv.org/abs/2310.06770)、[INFERCEPT](https://arxiv.org/abs/2402.01869)、[AutoGen](https://arxiv.org/abs/2308.08155)、[MemGPT](https://arxiv.org/abs/2310.08560)、[MCP Versioning](https://modelcontextprotocol.io/docs/learn/versioning)、[Position Interpolation](https://arxiv.org/abs/2306.15595)、[SSE](https://w3c.github.io/eventsource/)、[Representation Engineering](https://arxiv.org/abs/2310.01405)、[Contrastive Decoding](https://arxiv.org/abs/2210.15097)、[Semantic Entropy](https://arxiv.org/abs/2302.09664)、[ROME](https://arxiv.org/abs/2202.05262)、[LLM Watermark](https://arxiv.org/abs/2301.10226)、[Prompt Tuning](https://arxiv.org/abs/2104.08691)、[Adaptive Test-Time Compute](https://arxiv.org/abs/2604.14853)、[Sparse Autoencoders](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html)、[HyDE](https://arxiv.org/abs/2212.10496)、[ReAct](https://arxiv.org/abs/2210.03629)、[Toolformer](https://arxiv.org/abs/2302.04761)、[KIVI](https://arxiv.org/abs/2402.02750)、[S-LoRA](https://arxiv.org/abs/2311.03285)、[vLLM Reproducibility](https://docs.vllm.ai/en/v0.9.1/usage/reproducibility.html) 与 [Transformers StopStringCriteria](https://huggingface.co/docs/transformers/en/internal/generation_utils)。

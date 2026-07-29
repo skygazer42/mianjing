@@ -304,7 +304,7 @@
 
 ## 第十七组：LLM 推理优化与 Agent 训练面试题
 
-这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子 RAG 回填、HyDE grounding 与 Agent 错误恢复。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
+这一组连接推理内核与 Agent 后训练：EAGLE 的草稿—验证提交、H₂O 的 KV 淘汰、Native Sparse Attention 的 block 合同，以及 Agent trace 到 RL transition 的解耦；随后把同一套可验证合同用于有状态工具评测、代码 Agent、interruption-aware KV、跨工具副作用、多 Agent handoff、上下文压缩、MCP schema、动作前审批、RoPE 长上下文、流式协议、并行工具调用、chat template、Activation Steering、Contrastive Decoding、Semantic Entropy、知识编辑、水印、软提示、输出 PII、test-time compute 分配、SAE 稀疏特征、父子 RAG 回填、HyDE grounding、Agent 错误恢复、KV cache 非对称量化、LoRA adapter 池、批处理随机性与 stop string 提交。每本都用可复放的小状态与断言区分“候选/近似”同“最终 target、权限或 learner 合同”。
 
 | 编号 | Notebook 回答 | 面试问题 |
 | --- | --- | --- |
@@ -336,6 +336,10 @@
 | 212 | [RAG 父子切块与上下文回填](../27-llm-inference-agent-training-interview-questions/212-rag-parent-child-chunking-context-from-scratch.ipynb) | child 召回、parent 去重回填、ACL/版本门禁、双层引用与陈旧索引拒绝怎样实现？ |
 | 213 | [HyDE Query Expansion、RRF 与 Grounding](../27-llm-inference-agent-training-interview-questions/213-hyde-query-expansion-rrf-grounding-from-scratch.ipynb) | 原 query/假设文档候选怎样融合，且如何保证答案只能引用真实文档？ |
 | 214 | [Agent Tool Error Recovery 与熔断](../27-llm-inference-agent-training-interview-questions/214-agent-tool-error-recovery-circuit-breaker-from-scratch.ipynb) | 错误分类、幂等重试、指数退避、circuit breaker、fallback 和人工升级怎样实现？ |
+| 215 | [KV Cache 非对称量化与异常值回退](../27-llm-inference-agent-training-interview-questions/215-llm-kv-cache-asymmetric-quantization-outlier-fallback-from-scratch.ipynb) | group-wise affine quantization、outlier residual、版本 gate、attention oracle 和字节账本怎样实现？ |
+| 216 | [S-LoRA 多 Adapter 服务与版本化内存池](../27-llm-inference-agent-training-interview-questions/216-slora-multi-adapter-serving-versioned-pool-from-scratch.ipynb) | base+delta forward、租户授权、refcount 驱逐、兼容 batch、池满排队与不可变热更新怎样实现？ |
+| 217 | [连续批处理 Batch-Invariant 随机采样](../27-llm-inference-agent-training-interview-questions/217-llm-continuous-batching-batch-invariant-sampling-from-scratch.ipynb) | request/step/seed 坐标 RNG、CDF sample、调度重排、全局 RNG 反例、trace 与版本 gate 怎样实现？ |
+| 218 | [LLM 流式 Stop Sequence 安全提交](../27-llm-inference-agent-training-interview-questions/218-llm-streaming-stop-sequence-safe-commit-from-scratch.ipynb) | 前缀缓冲、跨 chunk 匹配、flush、overlap、finish reason 与 stop 配置门禁怎样实现？ |
 
 ## 推荐学习顺序
 
@@ -359,7 +363,7 @@
 18. 继续运行 `151–156 -> 157–162`：先比较数值、并行、缓存和调度优化，再把同样的可验证合同应用到对齐、多模态、工具训练、授权与 Agent 可靠性。
 19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
 20. 继续运行 `175–180 -> 181–186`：先比较动态计算、低比特与扩散生成的 correctness oracle，再串联偏好优化、Agentic RAG、树搜索、belief state 和长期记忆治理。
-21. 继续运行 `187–210 -> 211–214`：在推理、Agent、表征、知识与发布边界之上，补齐稀疏特征检查、分层检索/HyDE 的真实证据约束，以及工具错误恢复和熔断控制面。
+21. 继续运行 `187–214 -> 215–218`：在推理、Agent、表征、知识与发布边界之上，补齐稀疏特征检查、分层检索/HyDE 的真实证据约束、工具错误恢复，再进入 KV 量化、adapter 池、并发采样和流式终止的服务合同。
 
 ## 统一验收标准
 
