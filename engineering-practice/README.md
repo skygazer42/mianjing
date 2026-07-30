@@ -371,6 +371,30 @@
 | 245 | [LLM Serving 请求取消、背压与 KV 释放](../27-llm-agent-engineering/59-llm-serving-request-cancellation-backpressure-kv-release-from-scratch.ipynb) | waiting/running/terminal 状态、disconnect/abort、admission、step race、KV ownership 与完成事件怎样实现？ |
 | 246 | [Agent 工具供应链签名 Manifest 与来源](../27-llm-agent-engineering/60-agent-tool-supply-chain-signed-manifest-provenance-from-scratch.ipynb) | publisher trust root、canonical manifest、schema/description/artifact digest、权限 diff、版本固定与隔离怎样实现？ |
 
+## 第十八组：LLM Core 训练与架构面试题
+
+这一组补齐近期开源 LLM 最常被追问的训练和后训练细节：从 Muon、μP、batch/loss 稳定性，到固定状态注意力、GSPO/GRPO/RLOO 和发布回滚。目录中的 30 本 Notebook 均是一题一答，并保留同数据 baseline、关键中间量和失败修复。
+
+| 全局序号 | 专题入口 | 覆盖问题 |
+| --- | --- | --- |
+| 247–276 | [LLM Core（30 题 / 30 本 Notebook）](../28-llm-core/README.md) | 训练稳定性、归一化/FFN、token loss、packing、固定状态注意力与后训练。 |
+
+## 第十九组：智能代理决策、执行与评测题
+
+这一组以“权威状态而不是模型自述”为中心，覆盖行动价值、工具控制面、长程运行、记忆、因果 trace 和发布门禁。每个问题均有可复放业务事件、状态账本、baseline 和失败修复。
+
+| 全局序号 | 专题入口 | 覆盖问题 |
+| --- | --- | --- |
+| 277–306 | [智能代理（30 题 / 30 本 Notebook）](../29-智能代理/README.md) | 工具发现/校验、计划与补偿、session/artifact、记忆、grading 与 release gate。 |
+
+## 第二十组：AI 基础与经典算法面试题
+
+这一组用业务语义小数据手写经典模型与训练评估流程，包含安全切分、数值稳定和过拟合反例，不把库调用误当作算法答案。
+
+| 全局序号 | 专题入口 | 覆盖问题 |
+| --- | --- | --- |
+| 307–336 | [AI 基础（30 题 / 30 本 Notebook）](../30-ai-basics/README.md) | 泛化、SVM/PCA、聚类/树/集成、指标、优化与漂移治理。 |
+
 ## 推荐学习顺序
 
 1. 先运行 01，理解“算法实现”必须包含训练产物、版本与正确性测试。
@@ -394,6 +418,7 @@
 19. 继续运行 `163–168 -> 169–174`：先验证现代架构、并行、RLVR 与模型合并，再把独立证据、版本和权限合同应用到检索、去污染、MCP 与多 Agent 安全决策。
 20. 继续运行 `175–180 -> 181–186`：先比较动态计算、低比特与扩散生成的 correctness oracle，再串联偏好优化、Agentic RAG、树搜索、belief state 和长期记忆治理。
 21. 继续运行 `187–242 -> 243–246`：在推理、Agent、表征、知识与发布边界之上，继续验证 ORPO 单阶段偏好、弹性训练一致恢复、请求取消/KV 回收和工具供应链签名完整性。
+22. 最后运行 `247–276 -> 277–306 -> 307–336`：分别掌握近期 LLM 训练/架构、智能代理决策与评测，以及经典 AI 算法的底层实现和失败边界。
 
 ## 统一验收标准
 
