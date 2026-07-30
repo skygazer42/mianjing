@@ -22,6 +22,7 @@
 13. [LLM Core](./28-llm-core/README.md)：训练稳定性、序列级策略优化、固定状态注意力与宽度迁移（30 道题 / 30 本独立 Notebook）。
 14. [智能代理](./29-智能代理/README.md)：追问价值、工具路由、跨 session 长程执行与轨迹评分（30 道题 / 30 本独立 Notebook）。
 15. [AI Basics](./30-ai-basics/README.md)：SVM、降维与白化、聚类/EM、树模型与梯度提升（30 道题 / 30 本独立 Notebook）。
+16. [Agent Loop 运行时](./29-agent-loop/README.md)：循环骨架与状态机、观察/上下文/工作记忆的循环内演化、终止/打转/回退控制、trace/确定性重放/故障注入与发布门禁（30 道题 / 30 本独立 Notebook）。与「智能代理（工具控制面）」和「21 Agent Loop（架构模式）」互补。
 
 ## 每个专题包含什么
 
@@ -35,7 +36,7 @@
 
 [工程实践 Notebooks](./engineering-practice/README.md) 专门回答“系统怎么实现和验证”，现有 336 份中文实验：前 18 份覆盖 tokenizer/检索/RAG、NLP 数据与实体链接、CV/OCR、图算法与 GNN、多模态、推荐及时序系统；19–66 用 PyTorch 手写 `class XxxNet(nn.Module)` 与 `forward`，复现 NLP、LLM 训练推理、2D/3D 视觉、图表示与等变网络、推荐、时序、生成、语音和强化学习架构；67–246 则把开放式系统设计、主流 ML/DL、生成式 AI、Agent Loop、LLM 系统、数据配方、现代架构、动态计算、并行训练、检索、后训练、对齐、安全、记忆与评测面试题拆成一题一本；247–336 继续补齐 LLM Core、智能代理和经典 AI 算法题，从底层公式和状态机实现到评测、部署与失败处理。
 
-第 55–66 份按方向放在根目录的 [LLM 训练与推理](./13-llm-train-decode/README.md)、[进阶视觉与 3D](./14-vision-3d/README.md)、[图表示与科学学习](./15-graph-learning/README.md) 和 [控制、时序与离散生成](./16-control-timeseries-gen/README.md) 中；第 67–78 份位于 [面试系统题底层实现](./17-search-data-systems/README.md)，第 79–90 份位于 [机器学习系统面试题](./18-ml-systems/README.md)，第 91–102 份位于 [主流机器学习与深度学习面试题](./19-ml-foundations/README.md)，第 103–114 份位于 [生成式 AI 与 Agent 高频面试题](./20-genai-agents/README.md)，第 115–126 份位于 [Agent Loop 深入面试题](./21-agent-loop/README.md)，第 127–138 份位于 [LLM 系统与推理面试题](./22-llm-reasoning/README.md)，第 139–150 份位于 [LLM 数据、推理服务与 Agent 互操作面试题](./23-llm-platform/README.md)，第 151–162 份位于 [LLM 效率、对齐与 Agent 评测面试题](./24-llm-efficiency-alignment/README.md)，第 163–174 份位于 [现代 LLM 架构、检索与 Agent 安全面试题](./25-llm-systems-safety/README.md)，第 175–186 份位于 [LLM 动态计算、后训练、Agentic RAG 与 Agent Loop 面试题](./26-adaptive-llm-agents/README.md)，第 187–246 份位于 [LLM 推理优化与 Agent 训练面试题](./27-llm-agent-engineering/README.md)，第 247–276 份位于 [LLM Core](./28-llm-core/README.md)，第 277–306 份位于 [智能代理](./29-智能代理/README.md)，第 307–336 份位于 [AI 基础](./30-ai-basics/README.md)，主索引仍由工程实践 README 统一维护。
+第 55–66 份按方向放在根目录的 [LLM 训练与推理](./13-llm-train-decode/README.md)、[进阶视觉与 3D](./14-vision-3d/README.md)、[图表示与科学学习](./15-graph-learning/README.md) 和 [控制、时序与离散生成](./16-control-timeseries-gen/README.md) 中；第 67–78 份位于 [面试系统题底层实现](./17-search-data-systems/README.md)，第 79–90 份位于 [机器学习系统面试题](./18-ml-systems/README.md)，第 91–102 份位于 [主流机器学习与深度学习面试题](./19-ml-foundations/README.md)，第 103–114 份位于 [生成式 AI 与 Agent 高频面试题](./20-genai-agents/README.md)，第 115–126 份位于 [Agent Loop 深入面试题](./21-agent-loop/README.md)，第 127–138 份位于 [LLM 系统与推理面试题](./22-llm-reasoning/README.md)，第 139–150 份位于 [LLM 数据、推理服务与 Agent 互操作面试题](./23-llm-platform/README.md)，第 151–162 份位于 [LLM 效率、对齐与 Agent 评测面试题](./24-llm-efficiency-alignment/README.md)，第 163–174 份位于 [现代 LLM 架构、检索与 Agent 安全面试题](./25-llm-systems-safety/README.md)，第 175–186 份位于 [LLM 动态计算、后训练、Agentic RAG 与 Agent Loop 面试题](./26-adaptive-llm-agents/README.md)，第 187–246 份位于 [LLM 推理优化与 Agent 训练面试题](./27-llm-agent-engineering/README.md)，第 247–276 份位于 [LLM Core](./28-llm-core/README.md)，第 277–306 份位于 [智能代理](./29-智能代理/README.md)，第 307–336 份位于 [AI 基础](./30-ai-basics/README.md)，第 337–366 份位于 [Agent Loop 运行时](./29-agent-loop/README.md)，主索引仍由工程实践 README 统一维护。
 
 编号约定：`engineering-practice` 目录保持 01–54；第 13–30 个专题目录内部都从 `01` 重新编号。工程实践总索引中的数字表示全库学习顺序，不要求与专题内文件名前缀相同。
 
